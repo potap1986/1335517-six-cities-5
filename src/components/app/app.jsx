@@ -1,18 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import WelcomeScreen from "../welcome-screen/welcome-screen";
+import MainPage from "../main-page/main-page";
 
 
 const App = (props) => {
-  const {errorsCount} = props;
+  const {placesCount} = props;
 
   return (
-    <WelcomeScreen errorsCount={errorsCount} />
+    <MainPage placesCount={placesCount} />
   );
 };
 
 App.propTypes = {
-  errorsCount: PropTypes.number.isRequired,
+  placesCount: PropTypes.number.isRequired,
 };
 
 export default App;
