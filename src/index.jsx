@@ -1,14 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/app/app";
-
-const Settings = {
-  PLACES_COUNT: 30
-};
+import {offers} from "./mocks/offers";
+import {reviews} from "./mocks/reviews";
 
 ReactDOM.render(
     <App
-      plasesCount={Settings.PLACES_COUNT}
+      offers={offers}
+      reviews={reviews}
     />,
     document.querySelector(`#root`)
 );
