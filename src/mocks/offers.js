@@ -14,6 +14,24 @@ const OFFER_TYPE = {
 
 const OFFER_FEATURES = [`wifi`, `dishwasher`, `parking`, `washer`, `elevator`, `conditioner`];
 
+const LOCATIONS = [
+  {
+    lat: `52.3909553943508`,
+    lng: `4.85309666406198`
+  },
+  {
+    lat: `52.369553943508`,
+    lng: `4.85309666406198`
+  },
+  {
+    lat: `52.3909553943508`,
+    lng: `4.929309666406198`
+  },
+  {
+    lat: `52.3809553943508`,
+    lng: `4.939309666406198`
+  }];
+
 const ratingMIN = 1;
 const ratingMAX = 5;
 const roomsMIN = 1;
@@ -53,8 +71,6 @@ const getMaster = function (index) {
 
 const createOffers = function (count) {
   const array = [];
-  let locationX = getRandomNumber(50, 700);
-  let locationY = getRandomNumber(130, 630);
   for (let i = 0; i < count; i++) {
     const object = {
       id: i + 1,
@@ -72,8 +88,7 @@ const createOffers = function (count) {
       facilities: getNewOfferFeatures(),
       isBookmarked: getRandomBool(),
       isProUser: getRandomBool(),
-      x: locationX,
-      y: locationY,
+      coordinates: LOCATIONS[i],
     };
     array.push(object);
   }
