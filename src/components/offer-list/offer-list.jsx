@@ -20,7 +20,7 @@ class OfferList extends PureComponent {
           <OfferCard
             key={offer.id}
             offer={offer}
-            onHover={() => {
+            onOfferHover={() => {
               this.setState(() => ({
                 offerActive: offer,
               }));
