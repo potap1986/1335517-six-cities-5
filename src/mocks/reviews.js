@@ -1,7 +1,7 @@
 const ratingMIN = 1;
 const ratingMAX = 5;
 
-const offersQantity = 4;
+const offersQantity = 8;
 
 const Time = {
   DAY: 24 * 60 * 60 * 1000,
@@ -65,4 +65,4 @@ const getReviewsArray = (leng) => {
   return arr;
 };
 
-export const reviews = getReviewsArray(offersQantity);
+export default getReviewsArray(offersQantity);

@@ -24,7 +24,7 @@ const OfferCard = (props) => {
             evt.preventDefault();
             onOfferClick();
           }}>
-          <img className="place-card__image" src={offer.image[0]} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src={offer.image[0]} width={className === `favorites` ? `150` : `260`} height={className === `favorites` ? `110` : `200`} alt="Place image"/>
         </a>
       </div>
       <div className={`place-card__info ${className === `favorites` ? `${className}__card-info` : ``}`}>
