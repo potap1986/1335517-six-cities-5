@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Map from '../map/map';
 import Bookmark from '../bookmark/bookmark';
@@ -161,4 +162,10 @@ OfferScreen.propTypes = {
   reviews: PropTypes.array.isRequired,
 };
 
-export default OfferScreen;
+const mapStateToProps = (state) => ({
+  offers: state.offersForCity,
+  reviews: state.reviews,
+});
+
+export {OfferScreen};
+export default connect(mapStateToProps)(OfferScreen);

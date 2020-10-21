@@ -4,13 +4,15 @@ const getRandomNumber = (min, max) => {
 
 const getRandomBool = (chance = 0.5) => Math.random() < chance;
 
-const offersQantity = 4;
+const offersQantity = 8;
 const OFFER_TYPE = {
   apartment: `Apartment`,
   room: `Private Room`,
   house: `House`,
   hotel: `Hotel`,
 };
+
+const CITIES = [`Amsterdam`, `Paris`, `Cologne`, `Brussels`, `Hamburg`, `Dusseldorf`];
 
 const OFFER_FEATURES = [`wifi`, `dishwasher`, `parking`, `washer`, `elevator`, `conditioner`];
 
@@ -88,11 +90,12 @@ const createOffers = function (count) {
       facilities: getNewOfferFeatures(),
       isBookmarked: getRandomBool(),
       isProUser: getRandomBool(),
-      coordinates: LOCATIONS[i],
+      coordinates: i < 4 ? LOCATIONS[i] : LOCATIONS[i - 4],
+      city: CITIES[getRandomNumber(0, 5)],
     };
     array.push(object);
   }
   return array;
 };
 
-export const offers = createOffers(offersQantity);
+export default createOffers(offersQantity);

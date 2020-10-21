@@ -1,5 +1,4 @@
 import React, {Fragment} from "react";
-import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch, Link} from "react-router-dom";
 import MainPage from "../main-page/main-page";
 import LoginScreen from "../login-screen/login-screen";
@@ -7,8 +6,7 @@ import FavoritesScreen from "../favorites-screen/favorites-screen";
 import OfferScreen from "../offer-screen/offer-screen";
 
 
-const App = (props) => {
-  const {offers, reviews} = props;
+const App = () => {
 
   return (
     <BrowserRouter>
@@ -16,7 +14,6 @@ const App = (props) => {
         <Route exact path ="/"
           render={({history}) => (
             <MainPage
-              offers={offers}
               onOfferClick={() => history.push(`/offer/666`)}
             />
           )}
@@ -25,13 +22,10 @@ const App = (props) => {
           <LoginScreen />
         </Route>
         <Route exact path ="/favorites">
-          <FavoritesScreen offers={offers} />
+          <FavoritesScreen />
         </Route>
         <Route exact path ="/offer/:id">
-          <OfferScreen
-            offers={offers}
-            reviews={reviews}
-          />
+          <OfferScreen />
         </Route>
         <Route
           render={() => (
@@ -50,9 +44,6 @@ const App = (props) => {
   );
 };
 
-App.propTypes = {
-  offers: PropTypes.array.isRequired,
-  reviews: PropTypes.array.isRequired
-};
+App.propTypes = {};
 
 export default App;
