@@ -1,41 +1,35 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import OfferCard from '../offer-card/offer-card';
+import {connect} from 'react-redux';
 
-class OfferList extends PureComponent {
-  constructor(props) {
-    super(props);
+const OfferList = (props) => {
+  const {offers, onOfferClick, onOfferHover} = props;
 
-    this.state = {
-      offerActive: null,
-    };
-  }
-
-  render() {
-    const {offers, onOfferClick} = this.props;
-
-    return (
-      <div className="cities__places-list places__list tabs__content">
-        {offers.map((offer) => (
-          <OfferCard
-            key={offer.id}
-            offer={offer}
-            onOfferHover={() => {
-              this.setState(() => ({
-                offerActive: offer,
-              }));
-            }}
-            onOfferClick={onOfferClick}
-          />
-        ))}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="cities__places-list places__list tabs__content">
+      {offers.map((offer) => (
+        <OfferCard
+          key={offer.id}
+          offer={offer}
+          onOfferHover={onOfferHover}
+          onOfferClick={onOfferClick}
+          className={`cities`}
+        />
+      ))}
+    </div>
+  );
+};
 
 OfferList.propTypes = {
   offers: PropTypes.array.isRequired,
   onOfferClick: PropTypes.func.isRequired,
+  onOfferHover: PropTypes.func.isRequired,
 };
 
-export default OfferList;
+const mapStateToProps = (state) => ({
+  offers: state.sortedOffers,
+});
+
+export {OfferList};
+export default connect(mapStateToProps)(OfferList);
