@@ -24,18 +24,18 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.CITY_CHANGE:
       return extend(state, {
-        currentCity: action.city,
+        currentCity: action.payload,
       });
     case ActionType.RESET_SORT_TYPE:
-      return Object.assign({}, state, {
+      return extend(state, {
         sortType: Sorting.POPULAR,
       });
     case ActionType.RESET_HOVERED_OFFER:
-      return Object.assign({}, state, {
+      return extend(state, {
         hoveredOffer: null,
       });
     case ActionType.RESET_SORTED_OFFERS:
-      return Object.assign({}, state, {
+      return extend(state, {
         sortedOffers: state.offers.filter((offer) => offer.city === state.currentCity),
       });
     case ActionType.GET_OFFERS:
@@ -43,11 +43,14 @@ const reducer = (state = initialState, action) => {
         offersForCity: state.offers.filter((offer) => offer.city === state.currentCity),
       });
     case ActionType.GET_HOVERED_OFFER:
-      return Object.assign({}, state, {
-        hoveredOffer: action.offer,
+      return extend(state, {
+        hoveredOffer: action.payload,
       });
     case ActionType.SORT_OFFERS:
-      switch (action.sort) {
+      return extend(state, {
+        sortType: action.payload,
+      });
+      /* switch (action.sort) {
         case Sorting.POPULAR:
           return Object.assign({}, state, {
             sortType: Sorting.POPULAR,
@@ -73,7 +76,7 @@ const reducer = (state = initialState, action) => {
             sortType: Sorting.POPULAR,
             sortedOffers: offers.filter((offer) => offer.city === state.currentCity),
           });
-      }
+      }*/
     default: return state;
   }
 };

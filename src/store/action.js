@@ -11,19 +11,18 @@ export const ActionType = {
 export const ActionCreator = {
   changeCity: (city) => ({
     type: ActionType.CITY_CHANGE,
-    city,
+    payload: city,
   }),
   getOffers: () => ({
     type: ActionType.GET_OFFERS,
   }),
   getHoveredOffer: (offer) => ({
     type: ActionType.GET_HOVERED_OFFER,
-    offer,
+    payload: offer,
   }),
   sortOffers: (sort) => ({
     type: ActionType.SORT_OFFERS,
-    sort,
-    sortType: sort,
+    payload: sort,
   }),
   resetSortType: () => ({
     type: ActionType.RESET_SORT_TYPE,

@@ -7,14 +7,12 @@ const Sort = (props) => {
   const {sortType, onSortTypeClick} = props;
   const [stateOpened, setState] = React.useState(false);
 
-  const handleSortClick = (evt) => {
-    evt.preventDefault();
-    setState(!stateOpened);
+  const handleSortClick = () => {
+    setState((prevState) => ({stateOpened: !prevState.stateOpened}));
   };
 
   const handleSortTypeClick = (evt) => {
-    evt.preventDefault();
-    setState(!stateOpened);
+    setState((prevState) => ({stateOpened: !prevState.stateOpened}));
     onSortTypeClick(evt.target.textContent);
   };
 
