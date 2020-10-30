@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Map from '../map/map';
+import Sort from '../sort/sort';
 import OfferList from '../offer-list/offer-list';
 import CityChange from '../city-change/city-change';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 
 const MainPage = (props) => {
-  const {offers, city, cities, onOfferClick, onCityChange} = props;
+  const {offers, city, onOfferClick, onCityChange, onSortTypeClick, onOfferHover} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -38,7 +39,7 @@ const MainPage = (props) => {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
 
-          <CityChange currentCity={city} cities={cities} onCityChange={onCityChange} />
+          <CityChange onCityChange={onCityChange} />
 
         </div>
         <div className="cities">
@@ -58,31 +59,9 @@ const MainPage = (props) => {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{`${offers.length} ${offers.length > 1 ? `places` : `place`}`} to stay in {city}</b>
-                <form className="places__sorting" action="#" method="get">
-                  <span className="places__sorting-caption">Sort by</span>
-                  <span className="places__sorting-type" tabIndex="0">
-                  Popular
-                    <svg className="places__sorting-arrow" width="7" height="4">
-                      <use xlinkHref="#icon-arrow-select"></use>
-                    </svg>
-                  </span>
-                  <ul className="places__options places__options--custom places__options--opened">
-                    <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                    <li className="places__option" tabIndex="0">Price: low to high</li>
-                    <li className="places__option" tabIndex="0">Price: high to low</li>
-                    <li className="places__option" tabIndex="0">Top rated first</li>
-                  </ul>
-                  {/*
-                <select className="places__sorting-type" id="places-sorting">
-                  <option className="places__option" value="popular" selected="">Popular</option>
-                  <option className="places__option" value="to-high">Price: low to high</option>
-                  <option className="places__option" value="to-low">Price: high to low</option>
-                  <option className="places__option" value="top-rated">Top rated first</option>
-                </select>
-                */}
-                </form>
+                <Sort onSortTypeClick={onSortTypeClick}/>
 
-                <OfferList offers={offers} onOfferClick={onOfferClick}/>
+                <OfferList onOfferClick={onOfferClick} onOfferHover={onOfferHover}/>
 
               </section>
               <div className="cities__right-section">
@@ -101,21 +80,31 @@ const MainPage = (props) => {
 MainPage.propTypes = {
   offers: PropTypes.array.isRequired,
   city: PropTypes.string.isRequired,
-  cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   onOfferClick: PropTypes.func.isRequired,
   onCityChange: PropTypes.func.isRequired,
+  onSortTypeClick: PropTypes.func.isRequired,
+  onOfferHover: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   city: state.currentCity,
-  cities: state.cities,
   offers: state.offersForCity,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onCityChange(city) {
+    dispatch(ActionCreator.resetSortType());
+    dispatch(ActionCreator.resetHoveredOffer());
     dispatch(ActionCreator.changeCity(city));
+    dispatch(ActionCreator.resetSortedOffers());
     dispatch(ActionCreator.getOffers());
+  },
+  onOfferHover(offer) {
+    dispatch(ActionCreator.getHoveredOffer(offer));
+  },
+  onSortTypeClick(sort) {
+    dispatch(ActionCreator.resetHoveredOffer());
+    dispatch(ActionCreator.sortOffers(sort));
   },
 });
 

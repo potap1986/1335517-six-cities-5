@@ -22,7 +22,7 @@ const OfferCard = (props) => {
           href="#"
           onClick={(evt) => {
             evt.preventDefault();
-            onOfferClick();
+            onOfferClick(offer);
           }}>
           <img className="place-card__image" src={offer.image[0]} width={className === `favorites` ? `150` : `260`} height={className === `favorites` ? `110` : `200`} alt="Place image"/>
         </a>

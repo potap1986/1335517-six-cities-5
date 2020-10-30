@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 const CityChange = (props) => {
   const {currentCity, cities, onCityChange} = props;
-  const cityRef = React.createRef();
 
   return (
     <section className="locations container">
@@ -11,14 +11,11 @@ const CityChange = (props) => {
         {cities.map((city, index) => (
           <li key={`${city}-${index}`} className="locations__item">
             <a
-              ref={cityRef}
               onClick={(evt) => {
                 evt.preventDefault();
-                document.querySelector(`.tabs__item--active`).classList.remove(`tabs__item--active`);
-                evt.target.closest(`.tabs__item`).classList.add(`tabs__item--active`);
                 onCityChange(city);
               }}
-              className={`locations__item-link tabs__item ${city === currentCity && `tabs__item--active`}`}
+              className={`locations__item-link tabs__item ${city === currentCity ? `tabs__item--active` : ``}`}
               href="#">
               <span>{city}</span>
             </a>
@@ -35,4 +32,10 @@ CityChange.propTypes = {
   currentCity: PropTypes.string.isRequired,
 };
 
-export default CityChange;
+const mapStateToProps = (state) => ({
+  currentCity: state.currentCity,
+  cities: state.cities,
+});
+
+export {CityChange};
+export default connect(mapStateToProps)(CityChange);
