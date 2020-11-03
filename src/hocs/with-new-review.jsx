@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 
 const withNewReview = (WrappedComponentForm) => {
   class WithNewReview extends PureComponent {
-
     constructor(props) {
-
       super(props);
       this.state = {
         id: this.props.offer.id,
@@ -15,16 +13,16 @@ const withNewReview = (WrappedComponentForm) => {
         comment: null,
         date: new Date(),
       };
-      this.handleRatingChange = this.handleRatingChange.bind(this);
-      this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
+      this._handleRatingChange = this._handleRatingChange.bind(this);
+      this._handleTextAreaChange = this._handleTextAreaChange.bind(this);
     }
 
-    handleRatingChange(evt) {
+    _handleRatingChange(evt) {
       this.setState({rate: evt.target.value});
     }
 
 
-    handleTextAreaChange(evt) {
+    _handleTextAreaChange(evt) {
       this.setState({comment: evt.target.value});
     }
 
@@ -33,13 +31,13 @@ const withNewReview = (WrappedComponentForm) => {
         {...this.props}
         rate={this.state.rate}
         commemt={this.state.comment}
-        onRateChange={this.handleRatingChange}
-        onCommentChange={this.handleTextAreaChange}
+        onRateChange={this._handleRatingChange}
+        onCommentChange={this._handleTextAreaChange}
       />;
     }
   }
 
-  WithNewReview .propTypes = {
+  WithNewReview.propTypes = {
     offer: PropTypes.shape({
       id: PropTypes.number.isRequired,
     }).isRequired,
