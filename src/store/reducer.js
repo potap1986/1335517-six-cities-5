@@ -6,7 +6,7 @@ import {Sorting} from '../const';
 
 const allCities = new Set([...offers.map((offer) => offer.city)]);
 const cities = [...allCities];
-const initialCity = cities[0];
+const initialCity = cities[0] ? cities[0] : `All cities`;
 const initialOffers = offers.filter((offer) => offer.city === initialCity);
 
 const initialState = {
@@ -50,33 +50,6 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         sortType: action.payload,
       });
-      /* switch (action.sort) {
-        case Sorting.POPULAR:
-          return Object.assign({}, state, {
-            sortType: Sorting.POPULAR,
-            sortedOffers: offers.filter((offer) => offer.city === state.currentCity),
-          });
-        case Sorting.PRICE_LOW_TO_HIGH:
-          return Object.assign({}, state, {
-            sortType: Sorting.PRICE_LOW_TO_HIGH,
-            sortedOffers: offers.filter((offer) => offer.city === state.currentCity).sort((a, b) => a.price - b.price),
-          });
-        case Sorting.PRICE_HIGH_TO_LOW:
-          return Object.assign({}, state, {
-            sortType: Sorting.PRICE_HIGH_TO_LOW,
-            sortedOffers: offers.filter((offer) => offer.city === state.currentCity).sort((a, b) => b.price - a.price),
-          });
-        case Sorting.TOP_RATED:
-          return Object.assign({}, state, {
-            sortType: Sorting.TOP_RATED,
-            sortedOffers: offers.filter((offer) => offer.city === state.currentCity).sort((a, b) => a.rate - b.rate),
-          });
-        default:
-          return Object.assign({}, state, {
-            sortType: Sorting.POPULAR,
-            sortedOffers: offers.filter((offer) => offer.city === state.currentCity),
-          });
-      }*/
     default: return state;
   }
 };

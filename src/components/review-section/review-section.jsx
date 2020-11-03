@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReviewList from '../review-list/review-list';
 import NewReview from '../new-review/new-review';
+import withNewReview from "../../hocs/with-new-review";
+
+const NewReviewWrapped = withNewReview(NewReview);
 
 const ReviewSection = (props) => {
   const {reviews, offer} = props;
@@ -12,7 +15,7 @@ const ReviewSection = (props) => {
 
       <ReviewList reviews={reviews} />
 
-      <NewReview offer={offer} />
+      <NewReviewWrapped offer={offer}/>
 
     </section>
   );
