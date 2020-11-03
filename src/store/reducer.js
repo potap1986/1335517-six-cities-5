@@ -6,7 +6,7 @@ import {Sorting} from '../const';
 
 const allCities = new Set([...offers.map((offer) => offer.city)]);
 const cities = [...allCities];
-const initialCity = cities[0];
+const initialCity = cities[0] ? cities[0] : `All cities`;
 const initialOffers = offers.filter((offer) => offer.city === initialCity);
 
 const initialState = {

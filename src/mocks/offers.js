@@ -4,7 +4,7 @@ const getRandomNumber = (min, max) => {
 
 const getRandomBool = (chance = 0.5) => Math.random() < chance;
 
-const offersQantity = 8;
+const offersQantity = 0;
 const OFFER_TYPE = {
   apartment: `Apartment`,
   room: `Private Room`,
