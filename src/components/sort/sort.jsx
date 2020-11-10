@@ -5,14 +5,14 @@ import {connect} from 'react-redux';
 
 const Sort = (props) => {
   const {sortType, onSortTypeClick} = props;
-  const [stateOpened, setState] = React.useState(false);
+  const [opened, setOpened] = React.useState(false);
 
   const handleSortClick = () => {
-    setState((prevState) => ({stateOpened: !prevState.stateOpened}));
+    setOpened((prevState) => ({opened: !prevState.opened}));
   };
 
   const handleSortTypeClick = (evt) => {
-    setState((prevState) => ({stateOpened: !prevState.stateOpened}));
+    setOpened((prevState) => ({opened: !prevState.opened}));
     onSortTypeClick(evt.target.textContent);
   };
 
@@ -25,7 +25,7 @@ const Sort = (props) => {
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      {stateOpened &&
+      {opened &&
         <ul className="places__options places__options--custom places__options--opened">
           {Object.values(Sorting).map((sort) => (
             <li key={sort} onClick={handleSortTypeClick} className={`places__option ${sortType === sort ? `places__option--active` : ``}`} tabIndex="0">{sort}</li>
@@ -41,7 +41,7 @@ Sort.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  sortType: state.sortType,
+  sortType: state.APPLICATION.sortType,
 });
 
 const MemoizedSort = React.memo(Sort);

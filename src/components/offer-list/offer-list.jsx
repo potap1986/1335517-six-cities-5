@@ -5,11 +5,13 @@ import {connect} from 'react-redux';
 import {getSorting} from '../../utils';
 
 const OfferList = (props) => {
-  const {offers, onOfferClick, onOfferHover} = props;
+  const {offers, sorting, onOfferClick, onOfferHover} = props;
+
+  const sortedOffers = getSorting(offers, sorting);
 
   return (
     <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer) => (
+      {sortedOffers.map((offer) => (
         <OfferCard
           key={offer.id}
           offer={offer}
@@ -26,14 +28,12 @@ OfferList.propTypes = {
   offers: PropTypes.array.isRequired,
   onOfferClick: PropTypes.func.isRequired,
   onOfferHover: PropTypes.func.isRequired,
+  sorting: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  const currentCityOffers = getSorting(state.offers.filter((offer) => offer.city === state.currentCity), state.sortType);
-  return {
-    offers: currentCityOffers,
-  };
-};
+const mapStateToProps = (state) => ({
+  offers: state.APPLICATION.offersForCity,
+  sorting: state.APPLICATION.sortType,
+});
 
-export {OfferList};
 export default connect(mapStateToProps)(OfferList);

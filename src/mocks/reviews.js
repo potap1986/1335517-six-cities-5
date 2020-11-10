@@ -1,7 +1,7 @@
 const ratingMIN = 1;
 const ratingMAX = 5;
 
-const offersQantity = 8;
+const offersQantity = 100;
 
 const Time = {
   DAY: 24 * 60 * 60 * 1000,
@@ -46,7 +46,7 @@ const getRandomNumber = (min = 0, max) => Math.floor(Math.random() * (max - min 
 
 const getReview = () => ({
   avatar: `img/avatar-max.jpg`,
-  rate: getRandomNumber(ratingMIN, ratingMAX),
+  rating: getRandomNumber(ratingMIN, ratingMAX),
   comment: getRandomItem(sentences),
   author: getRandomItem(PEOPLE),
   date: Date.now() - getRandomNumber(0, Time.MONTH),

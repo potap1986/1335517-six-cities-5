@@ -1,30 +1,32 @@
 import React, {Fragment} from "react";
-import {BrowserRouter, Route, Switch, Link} from "react-router-dom";
+import {Router as BrowserRouter, Route, Switch, Link} from "react-router-dom";
 import MainPage from "../main-page/main-page";
 import LoginScreen from "../login-screen/login-screen";
 import FavoritesScreen from "../favorites-screen/favorites-screen";
 import OfferScreen from "../offer-screen/offer-screen";
+import browserHistory from "../../browser-history";
+import {AppRoute} from '../../const';
 
 
 const App = () => {
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
-        <Route exact path ="/"
+        <Route exact path = {AppRoute.MAIN_PAGE}
           render={({history}) => (
             <MainPage
               onOfferClick={() => history.push(`/offer/666`)}
             />
           )}
         />
-        <Route exact path ="/login">
+        <Route exact path = {AppRoute.LOGIN}>
           <LoginScreen />
         </Route>
-        <Route exact path ="/favorites">
+        <Route exact path = {AppRoute.FAVORITES}>
           <FavoritesScreen />
         </Route>
-        <Route exact path ="/offer/:id">
+        <Route exact path = {AppRoute.OFFER}>
           <OfferScreen />
         </Route>
         <Route
@@ -35,7 +37,7 @@ const App = () => {
                 <br />
                 <small>Page not found</small>
               </h1>
-              <Link style={{display: `block`, color: `blue`, width: `100%`, textAlign: `center`}} to="/">Go to main</Link>
+              <Link style={{display: `block`, color: `blue`, width: `100%`, textAlign: `center`}} to= {AppRoute.MAIN_PAGE}>Go to main</Link>
             </Fragment>
           )}
         />

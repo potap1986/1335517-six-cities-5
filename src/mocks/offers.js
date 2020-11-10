@@ -4,7 +4,7 @@ const getRandomNumber = (min, max) => {
 
 const getRandomBool = (chance = 0.5) => Math.random() < chance;
 
-const offersQantity = 0;
+const offersQantity = 8;
 const OFFER_TYPE = {
   apartment: `Apartment`,
   room: `Private Room`,
@@ -12,7 +12,7 @@ const OFFER_TYPE = {
   hotel: `Hotel`,
 };
 
-const CITIES = [`Amsterdam`, `Paris`, `Cologne`, `Brussels`, `Hamburg`, `Dusseldorf`];
+export const CITIES = [`Amsterdam`, `Paris`, `Cologne`, `Brussels`, `Hamburg`, `Dusseldorf`];
 
 const OFFER_FEATURES = [`wifi`, `dishwasher`, `parking`, `washer`, `elevator`, `conditioner`];
 
@@ -48,7 +48,7 @@ const getTitle = function (index) {
 const getPhotos = function () {
   const arr = [];
   for (let i = 0; i < getRandomNumber(1, 5); i++) {
-    arr.push(`img/apartment-0` + getRandomNumber(1, 3) + `.jpg`);
+    arr.push(`imgapartment-0` + getRandomNumber(1, 3) + `.jpg`);
   }
   return arr;
 };
@@ -73,25 +73,31 @@ const getMaster = function (index) {
 
 const createOffers = function (count) {
   const array = [];
+  const image = getPhotos();
   for (let i = 0; i < count; i++) {
     const object = {
       id: i + 1,
-      image: getPhotos(),
+      images: image,
+      previewImage: image[0],
       title: getTitle(i),
       description: [getDescription(i), getDescription(i), getDescription(i)],
       isPremium: getRandomBool(),
       price: getRandomNumber(10, 1000),
       type: Object.values(OFFER_TYPE)[getRandomNumber(0, 3)],
-      rate: getRandomNumber(ratingMIN, ratingMAX),
+      rating: getRandomNumber(ratingMIN, ratingMAX),
       bedrooms: getRandomNumber(roomsMIN, roomsMAX),
       adults: getRandomNumber(guestsMIN, guestsMAX),
-      avatar: `img/avatar-angelina.jpg`,
-      host: getMaster(i),
-      facilities: getNewOfferFeatures(),
-      isBookmarked: getRandomBool(),
-      isProUser: getRandomBool(),
+      hotelHost: {
+        avatar: `imgavatar-angelina.jpg`,
+        name: getMaster(i),
+        isProUser: getRandomBool(),
+      },
+      goods: getNewOfferFeatures(),
+      isFavorite: getRandomBool(),
       coordinates: i < 4 ? LOCATIONS[i] : LOCATIONS[i - 4],
-      city: CITIES[getRandomNumber(0, 5)],
+      hotelCity: {
+        name: CITIES[getRandomNumber(0, 5)],
+      }
     };
     array.push(object);
   }
