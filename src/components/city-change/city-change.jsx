@@ -39,5 +39,5 @@ const mapStateToProps = (state) => ({
   allOffers: state.DATA.offers,
 });
 
-export {CityChange};
+export {CityChange}; // Зачем нужен этот экспорт?
 export default connect(mapStateToProps)(CityChange);

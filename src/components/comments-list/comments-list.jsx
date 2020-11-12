@@ -12,7 +12,7 @@ const CommentsList = (props) => {
         review={review}
       />
     ))
-  );
+  ); // Таких пустых строк, как ниже, тоже быть не должно
 
 };
 

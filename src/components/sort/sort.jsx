@@ -40,6 +40,8 @@ Sort.propTypes = {
   sortType: PropTypes.string.isRequired,
 };
 
+// в функциональных компонентах вместо connect, mapStateToProps и mapDispatchToProps, обычно используют,
+// да и намного удобнее использовать хуки useSelector и useDispatch
 const mapStateToProps = (state) => ({
   sortType: state.APPLICATION.sortType,
 });

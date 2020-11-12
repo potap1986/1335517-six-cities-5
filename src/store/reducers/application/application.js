@@ -15,6 +15,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    // Корректнее CHANGE_CITY
     case ActionType.CITY_CHANGE:
       return extend(state, {
         currentCity: action.payload,
@@ -25,16 +26,20 @@ const reducer = (state = initialState, action) => {
       });
     case ActionType.RESET_HOVERED_OFFER:
       return extend(state, {
-        hoveredOffer: -1,
+        hoveredOffer: -1, // Если чего-то нет, то лучше присваивать ему null или undefined, а не -1
       });
+    // Почему GET, если ты наоборот записываешь данные в стор
     case ActionType.GET_HOVERED_OFFER:
       return extend(state, {
         hoveredOffer: action.payload,
       });
+    // Ты же не сортируешь предложения, а устанавливаешь тип сортировки, значит правильно будет SET_SORT_TYPE
     case ActionType.SORT_OFFERS:
       return extend(state, {
         sortType: action.payload,
       });
+    // Вообще код был бы намного более читаемым если бы в actionType содержалось бы имя поля которое ты меняешь в сторе,
+    // т.е если в экшен меняет поле offersForCity, то правильнее было бы назвать actionType set_offers_for_city
     case ActionType.SET_CITY_OFFERS:
       return extend(state, {
         offersForCity: action.payload,

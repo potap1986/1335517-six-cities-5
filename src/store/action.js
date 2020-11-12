@@ -13,7 +13,15 @@ export const ActionType = {
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
 };
 
+/*
+*   У тебя в одном файле экшен креэйторы относящиеся для всех редьюсеров, намного удобнее было бы хранить их либо в файле с
+*   редьюсером, либо в каждой папке с редьюсером можно содать файл actionCreators. Идея в том чтобы рядом с редьюсером лежали экшен
+*   креэйторы относящиеся только к этому редьюсеру.
+*  */
+
 export const ActionCreator = {
+  // Плохое название для экшен креатора через "get", через get, обычно, называют функции которые возвращают что-то,
+  // здесь логичнее было бы loadOffers, loadCities и т.д
   getOffers: (offers) => ({
     type: ActionType.GET_OFFERS,
     payload: offers,
@@ -26,7 +34,7 @@ export const ActionCreator = {
 
   getReviews: (reviews) => ({
     type: ActionType.GET_REVIEWS,
-    payload: reviews
+    payload: reviews,
   }),
 
   cityChange: (city) => ({
@@ -69,5 +77,5 @@ export const ActionCreator = {
   redirectToRoute: (url) => ({
     type: ActionType.REDIRECT_TO_ROUTE,
     payload: url,
-  })
+  }),
 };
