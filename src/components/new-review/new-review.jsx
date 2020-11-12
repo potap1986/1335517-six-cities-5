@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+// лишние отступы на 5й и 7й строке
 const NewReview = ({onRateChange, onCommentChange}) => {
 
   return (

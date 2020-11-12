@@ -2,6 +2,7 @@ import React, {createRef} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ApiActionCreator} from "../../store/api-actions";
+// Здесь нужен отступ
 class LoginScreen extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -102,5 +103,5 @@ const mapDispatchToProps = (dispatch) => ({
   }
 });
 
-export {LoginScreen};
+export {LoginScreen}; // Зачем нужен этот экспорт?
 export default connect(null, mapDispatchToProps)(LoginScreen);

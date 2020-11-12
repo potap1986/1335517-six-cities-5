@@ -81,5 +81,5 @@ const mapStateToProps = (state) => ({
   cities: state.DATA.cities,
 });
 
-export {FavoritesScreen};
+export {FavoritesScreen}; // Зачем нужен этот экспорт?
 export default connect(mapStateToProps)(FavoritesScreen);

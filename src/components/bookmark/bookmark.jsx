@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Bookmark = (props) => {
-  const {isFavorite, className} = props;
-
+// обычно делают так, но и так как делаешь ты, ошибкой не является
+const Bookmark = ({isFavorite, className}) => {
   return (
     <button className={`${className}-button button ${isFavorite && `${className}-button--active`}`} type="button">
       <svg className={`${className}-icon`} width={className === `property__bookmark` ? `31` : `18`} height={className === `property__bookmark` ? `33` : `19`}>

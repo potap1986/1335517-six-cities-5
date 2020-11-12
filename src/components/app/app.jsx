@@ -8,6 +8,7 @@ import browserHistory from "../../browser-history";
 import {AppRoute} from '../../const';
 
 
+// Следи за форматированием кода, таких пустых строк быть не должно (строка 13)
 const App = () => {
 
   return (
@@ -31,7 +32,7 @@ const App = () => {
         </Route>
         <Route
           render={() => (
-            <Fragment>
+            <Fragment> {/* Вместо <Fragment> в 2020 все используют такой синтаксис: <></> */}
               <h1 style={{textAlign: `center`}}>
                 404.
                 <br />
