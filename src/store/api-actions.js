@@ -5,7 +5,7 @@ import {AppRoute, APIRoute} from '../const';
 const ApiActionCreator = {
   fetchOffers: () => (dispatch, _getState, api) => (
     api.get(APIRoute.HOTELS)
-      .then(({data}) => dispatch(ActionCreator.getOffers(data)))
+      .then(({data}) => dispatch(ActionCreator.loadOffers(data)))
   ),
   checkAuth: () => (dispatch, _getState, api) => (
     api.get(APIRoute.LOGIN)

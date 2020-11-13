@@ -1,10 +1,10 @@
 export const ActionType = {
-  CITY_CHANGE: `CITY_CHANGE`,
-  GET_OFFERS: `GET_OFFERS`,
-  GET_REVIEWS: `GET_REVIEWS`,
-  GET_CITIES: `GET_CITIES`,
-  GET_HOVERED_OFFER: `GET_HOVERED_OFFER`,
-  SORT_OFFERS: `SORT_OFFERS`,
+  CHANGE_CITY: `CHANGE_CITY`,
+  LOAD_OFFERS: `LOAD_OFFERS`,
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
+  LOAD_CITIES: `LOAD_CITIES`,
+  SET_HOVERED_OFFER: `SET_HOVERED_OFFER`,
+  SET_SORT_TYPE: `SET_SORT_TYPE`,
   RESET_SORT_TYPE: `RESET_SORT_TYPE`,
   RESET_HOVERED_OFFER: `RESET_HOVERED_OFFER`,
   RESET_SORTED_OFFERS: `RESET_SORTED_OFFERS`,
@@ -14,33 +14,33 @@ export const ActionType = {
 };
 
 export const ActionCreator = {
-  getOffers: (offers) => ({
-    type: ActionType.GET_OFFERS,
+  loadOffers: (offers) => ({
+    type: ActionType.LOAD_OFFERS,
     payload: offers,
   }),
 
   getCities: (cities) => ({
-    type: ActionType.GET_CITIES,
+    type: ActionType.LOAD_CITIES,
     payload: cities,
   }),
 
   getReviews: (reviews) => ({
-    type: ActionType.GET_REVIEWS,
-    payload: reviews
+    type: ActionType.LOAD_REVIEWS,
+    payload: reviews,
   }),
 
   cityChange: (city) => ({
-    type: ActionType.CITY_CHANGE,
+    type: ActionType.CHANGE_CITY,
     payload: city,
   }),
 
   getHoveredOffer: (offer) => ({
-    type: ActionType.GET_HOVERED_OFFER,
+    type: ActionType.SET_HOVERED_OFFER,
     payload: offer,
   }),
 
   sortOffers: (sort) => ({
-    type: ActionType.SORT_OFFERS,
+    type: ActionType.SET_SORT_TYPE,
     payload: sort,
   }),
 
@@ -69,5 +69,5 @@ export const ActionCreator = {
   redirectToRoute: (url) => ({
     type: ActionType.REDIRECT_TO_ROUTE,
     payload: url,
-  })
+  }),
 };

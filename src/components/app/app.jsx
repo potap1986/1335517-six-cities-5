@@ -7,9 +7,7 @@ import OfferScreen from "../offer-screen/offer-screen";
 import browserHistory from "../../browser-history";
 import {AppRoute} from '../../const';
 
-
 const App = () => {
-
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>

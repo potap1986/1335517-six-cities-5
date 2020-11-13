@@ -13,7 +13,6 @@ const CommentsList = (props) => {
       />
     ))
   );
-
 };
 
 

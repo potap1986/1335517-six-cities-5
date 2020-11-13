@@ -2,6 +2,7 @@ import React, {createRef} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {ApiActionCreator} from "../../store/api-actions";
+
 class LoginScreen extends React.PureComponent {
   constructor(props) {
     super(props);

@@ -22,15 +22,15 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.GET_CITIES:
+    case ActionType.LOAD_CITIES:
       return extend(state, {
         cities: action.payload,
       });
-    case ActionType.GET_OFFERS:
+    case ActionType.LOAD_OFFERS:
       return extend(state, {
         offers: getAdaptedOffers(action.payload),
       });
-    case ActionType.GET_REVIEWS:
+    case ActionType.LOAD_REVIEWS:
       return extend(state, {
         reviews: action.payload,
       });
