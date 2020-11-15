@@ -8,13 +8,22 @@ import browserHistory from "../../browser-history";
 import {AppRoute} from '../../const';
 
 const App = () => {
+  const [activeOffer, setActiveOffer] = React.useState(null);
+
+  const getActiveOffer = (offer) => {
+    setActiveOffer(offer);
+  };
+
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path = {AppRoute.MAIN_PAGE}
           render={({history}) => (
             <MainPage
-              onOfferClick={() => history.push(`/offer/666`)}
+              onOfferClick={(offer) => {
+                getActiveOffer(offer);
+                history.push(`/offer/${offer.id}`);
+              }}
             />
           )}
         />
@@ -25,7 +34,7 @@ const App = () => {
           <FavoritesScreen />
         </Route>
         <Route exact path = {AppRoute.OFFER}>
-          <OfferScreen />
+          <OfferScreen offer={activeOffer}/>
         </Route>
         <Route
           render={() => (

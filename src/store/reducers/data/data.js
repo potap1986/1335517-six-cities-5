@@ -9,7 +9,7 @@ const getAdaptedOffers = (offers) => {
   return offers.map((offer) => adaptToClient(offer));
 };
 
-/* const getCities = (offers) => {
+/* const loadCities = (offers) => {
   const allCities = new Set([...offers.map((offer) => offer.hotelCity.name)]);
   return [...allCities];
 }; */

@@ -8,6 +8,7 @@ const CityChange = (props) => {
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
+        {onCityChange(currentCity, allOffers)}
         {cities.map((city, index) => (
           <li key={`${city}-${index}`} className="locations__item">
             <a

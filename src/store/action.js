@@ -19,27 +19,27 @@ export const ActionCreator = {
     payload: offers,
   }),
 
-  getCities: (cities) => ({
+  loadCities: (cities) => ({
     type: ActionType.LOAD_CITIES,
     payload: cities,
   }),
 
-  getReviews: (reviews) => ({
+  loadReviews: (reviews) => ({
     type: ActionType.LOAD_REVIEWS,
     payload: reviews,
   }),
 
-  cityChange: (city) => ({
+  changeCity: (city) => ({
     type: ActionType.CHANGE_CITY,
     payload: city,
   }),
 
-  getHoveredOffer: (offer) => ({
+  setHoveredOffer: (offer) => ({
     type: ActionType.SET_HOVERED_OFFER,
     payload: offer,
   }),
 
-  sortOffers: (sort) => ({
+  setSortType: (sort) => ({
     type: ActionType.SET_SORT_TYPE,
     payload: sort,
   }),

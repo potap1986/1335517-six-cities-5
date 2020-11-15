@@ -52,17 +52,17 @@ const getReview = () => ({
   date: Date.now() - getRandomNumber(0, Time.MONTH),
 });
 
-const getReviews = (num = 5) => Array.from({length: num}, getReview);
+const loadReviews = (num = 5) => Array.from({length: num}, getReview);
 
-const getReviewsArray = (leng) => {
+const loadReviewsArray = (leng) => {
   const arr = [];
   for (let i = 0; i < leng; i++) {
     arr.push({
       id: i + 1,
-      reviews: getReviews()
+      reviews: loadReviews()
     });
   }
   return arr;
 };
 
-export default getReviewsArray(offersQantity);
+export default loadReviewsArray(offersQantity);

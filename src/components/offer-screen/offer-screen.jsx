@@ -7,13 +7,13 @@ import OfferCard from '../offer-card/offer-card';
 import ReviewSection from '../review-section/review-section';
 import {ActionCreator} from '../../store/action';
 
-const {getHoveredOffer} = ActionCreator;
-
+const {setHoveredOffer} = ActionCreator;
 
 const OfferScreen = (props) => {
-  const {offers, reviews, hoveredOffer, onOfferHover} = props;
-  const offer = offers[offers.length - 1];
+  const {offer, offers, reviews, hoveredOffer, onOfferHover} = props;
   const propertyReviews = reviews.filter((review) => review.id === offer.id);
+  const indexOffer = offers.indexOf(offer);
+  const nearOffers = offers.slice(indexOffer - 1, indexOffer + 2);
 
   return (
     <div className="page">
@@ -122,14 +122,10 @@ const OfferScreen = (props) => {
                   </span>
                 </div>
 
-                {offer.description.length !== 0
+                {offer.description !== 0
                   &&
                   <div className="property__description">
-                    {offer.description.map((text, index) => (
-                      <p key={`0-${index}`} className="property__text">
-                        {text}
-                      </p>
-                    ))}
+                    {offer.description}
                   </div>}
 
               </div>
@@ -139,7 +135,7 @@ const OfferScreen = (props) => {
             </div>
           </div>
           <section className="property__map map">
-            <Map offers={offers} hoveredOffer={hoveredOffer} />
+            <Map offers={nearOffers} hoveredOffer={hoveredOffer} />
           </section>
         </section>
 
@@ -149,7 +145,7 @@ const OfferScreen = (props) => {
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
 
-              {offers.slice(0, 3).map((otherOffer) => (
+              {nearOffers.map((otherOffer) => (
                 otherOffer !== offer &&
                 <OfferCard key={otherOffer.id} onOfferHover={onOfferHover} onOfferClick={()=>({})} offer={otherOffer} className={`near-places`}/>
               ))}
@@ -163,6 +159,7 @@ const OfferScreen = (props) => {
 };
 
 OfferScreen.propTypes = {
+  offer: PropTypes.object.isRequired,
   offers: PropTypes.array.isRequired,
   reviews: PropTypes.array.isRequired,
   hoveredOffer: PropTypes.number.isRequired,
@@ -170,14 +167,14 @@ OfferScreen.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.APPLICATION.offersForCity.slice(0, 3),
+  offers: state.APPLICATION.offersForCity,
   reviews: state.DATA.reviews,
   hoveredOffer: state.APPLICATION.hoveredOffer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onOfferHover(offer) {
-    dispatch(getHoveredOffer(offer));
+    dispatch(setHoveredOffer(offer));
   },
 });
 

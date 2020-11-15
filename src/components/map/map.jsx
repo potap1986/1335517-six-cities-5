@@ -20,18 +20,21 @@ class Map extends React.PureComponent {
   }
 
   componentDidMount() {
-    this._renderMap();
+    const {offers} = this.props;
+    this._renderMap(offers, this._mapContainer.current);
   }
 
   componentDidUpdate() {
-    this._renderOffers();
+    const {offers, hoveredOffer} = this.props;
+    this._renderOffers(offers, hoveredOffer);
+    this._map.setView([offers[0].hotelCity.location.lat, offers[0].hotelCity.location.lng], offers[0].hotelCity.location.zoom);
   }
 
-  _renderMap() {
-    const city = [52.38333, 4.9];
-
-    const zoom = 12;
-    this._map = leaflet.map(`map`, {
+  _renderMap(offers, container) {
+    const {hoveredOffer} = this.props;
+    const city = [offers[0].hotelCity.location.lat, offers[0].hotelCity.location.lng];
+    const zoom = offers[0].hotelCity.location.zoom;
+    this._map = leaflet.map(container, {
       center: city,
       zoom,
       zoomControl: false,
@@ -45,11 +48,10 @@ class Map extends React.PureComponent {
       })
       .addTo(this._map);
 
-    this._renderOffers();
+    this._renderOffers(offers, hoveredOffer);
   }
 
-  _renderOffers() {
-    const {offers, hoveredOffer} = this.props;
+  _renderOffers(offers, hoveredOffer) {
     this._offers = offers;
     this._hoveredOffer = hoveredOffer;
 

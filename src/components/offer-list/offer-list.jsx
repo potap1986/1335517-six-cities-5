@@ -6,9 +6,7 @@ import {getSorting} from '../../utils';
 
 const OfferList = (props) => {
   const {offers, sorting, onOfferClick, onOfferHover} = props;
-
   const sortedOffers = getSorting(offers, sorting);
-
   return (
     <div className="cities__places-list places__list tabs__content">
       {sortedOffers.map((offer) => (
