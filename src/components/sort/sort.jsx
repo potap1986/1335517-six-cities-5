@@ -8,11 +8,11 @@ const Sort = (props) => {
   const [opened, setOpened] = React.useState(false);
 
   const handleSortClick = () => {
-    setOpened((prevState) => ({opened: !prevState.opened}));
+    setOpened((prevState) => !prevState);
   };
 
   const handleSortTypeClick = (evt) => {
-    setOpened((prevState) => ({opened: !prevState.opened}));
+    setOpened((prevState) => !prevState);
     onSortTypeClick(evt.target.textContent);
   };
 

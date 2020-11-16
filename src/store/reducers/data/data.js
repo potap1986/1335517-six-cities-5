@@ -1,4 +1,3 @@
-// import offers from '../../../mocks/offers';
 import reviews from '../../../mocks/reviews';
 import {CITIES} from '../../../mocks/offers';
 import {extend} from '../../../utils';
@@ -8,11 +7,6 @@ import {adaptToClient} from '../../../store/adapters';
 const getAdaptedOffers = (offers) => {
   return offers.map((offer) => adaptToClient(offer));
 };
-
-/* const loadCities = (offers) => {
-  const allCities = new Set([...offers.map((offer) => offer.hotelCity.name)]);
-  return [...allCities];
-}; */
 
 const initialState = {
   cities: CITIES,

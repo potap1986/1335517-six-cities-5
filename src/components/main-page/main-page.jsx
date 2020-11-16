@@ -8,7 +8,7 @@ import EmptyMainPage from '../empty-main-page/empty-main-page';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 
-const {changeCity, resetSortType, resetHoveredOffer, setCityOffers, /* resetCityOffers, loadOffers, */setHoveredOffer, setSortType} = ActionCreator;
+const {changeCity, resetSortType, resetHoveredOffer, setCityOffers, setHoveredOffer, setSortType} = ActionCreator;
 
 const MainPage = (props) => {
   const {offers, hoveredOffer, city, onOfferClick, onCityChange, onSortTypeClick, onOfferHover} = props;

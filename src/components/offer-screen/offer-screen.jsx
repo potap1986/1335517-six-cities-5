@@ -11,7 +11,9 @@ const {setHoveredOffer} = ActionCreator;
 
 const OfferScreen = (props) => {
   const {offer, offers, reviews, hoveredOffer, onOfferHover} = props;
-  const propertyReviews = reviews.filter((review) => review.id === offer.id);
+  const propertyReviews = React.useMemo(() => {
+    return reviews.filter((review) => review.id === offer.id);
+  }, [reviews]);
   const indexOffer = offers.indexOf(offer);
   const nearOffers = offers.slice(indexOffer - 1, indexOffer + 2);
 

@@ -10,10 +10,6 @@ import {AppRoute} from '../../const';
 const App = () => {
   const [activeOffer, setActiveOffer] = React.useState(null);
 
-  const getActiveOffer = (offer) => {
-    setActiveOffer(offer);
-  };
-
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
@@ -21,7 +17,7 @@ const App = () => {
           render={({history}) => (
             <MainPage
               onOfferClick={(offer) => {
-                getActiveOffer(offer);
+                setActiveOffer(offer);
                 history.push(`/offer/${offer.id}`);
               }}
             />
