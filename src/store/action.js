@@ -1,36 +1,73 @@
 export const ActionType = {
-  CITY_CHANGE: `CITY_CHANGE`,
-  GET_OFFERS: `GET_OFFERS`,
-  GET_HOVERED_OFFER: `GET_HOVERED_OFFER`,
-  SORT_OFFERS: `SORT_OFFERS`,
+  CHANGE_CITY: `CHANGE_CITY`,
+  LOAD_OFFERS: `LOAD_OFFERS`,
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
+  LOAD_CITIES: `LOAD_CITIES`,
+  SET_HOVERED_OFFER: `SET_HOVERED_OFFER`,
+  SET_SORT_TYPE: `SET_SORT_TYPE`,
   RESET_SORT_TYPE: `RESET_SORT_TYPE`,
   RESET_HOVERED_OFFER: `RESET_HOVERED_OFFER`,
   RESET_SORTED_OFFERS: `RESET_SORTED_OFFERS`,
+  SET_CITY_OFFERS: `SET_CITY_OFFERS`,
+  GET_AUTHORIZATION_STATUS: `GET_AUTHORIZATION_STATUS`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
 };
 
 export const ActionCreator = {
+  loadOffers: (offers) => ({
+    type: ActionType.LOAD_OFFERS,
+    payload: offers,
+  }),
+
+  loadCities: (cities) => ({
+    type: ActionType.LOAD_CITIES,
+    payload: cities,
+  }),
+
+  loadReviews: (reviews) => ({
+    type: ActionType.LOAD_REVIEWS,
+    payload: reviews,
+  }),
+
   changeCity: (city) => ({
-    type: ActionType.CITY_CHANGE,
+    type: ActionType.CHANGE_CITY,
     payload: city,
   }),
-  getOffers: () => ({
-    type: ActionType.GET_OFFERS,
-  }),
-  getHoveredOffer: (offer) => ({
-    type: ActionType.GET_HOVERED_OFFER,
+
+  setHoveredOffer: (offer) => ({
+    type: ActionType.SET_HOVERED_OFFER,
     payload: offer,
   }),
-  sortOffers: (sort) => ({
-    type: ActionType.SORT_OFFERS,
+
+  setSortType: (sort) => ({
+    type: ActionType.SET_SORT_TYPE,
     payload: sort,
   }),
+
   resetSortType: () => ({
     type: ActionType.RESET_SORT_TYPE,
   }),
+
   resetHoveredOffer: () => ({
     type: ActionType.RESET_HOVERED_OFFER,
   }),
+
   resetSortedOffers: () => ({
     type: ActionType.RESET_SORTED_OFFERS,
+  }),
+
+  setCityOffers: (offers) => ({
+    type: ActionType.SET_CITY_OFFERS,
+    payload: offers,
+  }),
+
+  getAuthorization: (status) => ({
+    type: ActionType.GET_AUTHORIZATION_STATUS,
+    payload: status,
+  }),
+
+  redirectToRoute: (url) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: url,
   }),
 };

@@ -8,8 +8,10 @@ import EmptyMainPage from '../empty-main-page/empty-main-page';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 
+const {changeCity, resetSortType, resetHoveredOffer, setCityOffers, setHoveredOffer, setSortType} = ActionCreator;
+
 const MainPage = (props) => {
-  const {offers, city, onOfferClick, onCityChange, onSortTypeClick, onOfferHover} = props;
+  const {offers, hoveredOffer, city, onOfferClick, onCityChange, onSortTypeClick, onOfferHover} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -59,7 +61,7 @@ const MainPage = (props) => {
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
-                  <Map offers={offers} />
+                  <Map offers={offers} hoveredOffer={hoveredOffer} />
                 </section>
               </div>
             </div>
@@ -72,6 +74,7 @@ const MainPage = (props) => {
 
 MainPage.propTypes = {
   offers: PropTypes.array.isRequired,
+  hoveredOffer: PropTypes.number.isRequired,
   city: PropTypes.string.isRequired,
   onOfferClick: PropTypes.func.isRequired,
   onCityChange: PropTypes.func.isRequired,
@@ -80,24 +83,24 @@ MainPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  city: state.currentCity,
-  offers: state.offersForCity,
+  city: state.APPLICATION.currentCity,
+  offers: state.APPLICATION.offersForCity,
+  hoveredOffer: state.APPLICATION.hoveredOffer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onCityChange(city) {
-    dispatch(ActionCreator.resetSortType());
-    dispatch(ActionCreator.resetHoveredOffer());
-    dispatch(ActionCreator.changeCity(city));
-    dispatch(ActionCreator.resetSortedOffers());
-    dispatch(ActionCreator.getOffers());
+  onCityChange: (city, allOffers) => {
+    dispatch(resetSortType());
+    dispatch(resetHoveredOffer());
+    dispatch(changeCity(city));
+    dispatch(setCityOffers(allOffers.filter((offer) => offer.hotelCity.name === city)));
   },
   onOfferHover(offer) {
-    dispatch(ActionCreator.getHoveredOffer(offer));
+    dispatch(setHoveredOffer(offer));
   },
   onSortTypeClick(sort) {
-    dispatch(ActionCreator.resetHoveredOffer());
-    dispatch(ActionCreator.sortOffers(sort));
+    dispatch(resetHoveredOffer());
+    dispatch(setSortType(sort));
   },
 });
 

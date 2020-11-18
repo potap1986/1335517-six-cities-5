@@ -22,7 +22,7 @@ const ReviewItem = (props) => {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: `${review.rate * 100 / 5}%`}}></span>
+            <span style={{width: `${review.rating * 100 / 5}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -39,7 +39,7 @@ ReviewItem.propTypes = {
   review: PropTypes.shape({
     author: PropTypes.string.isRequired,
     avatar: PropTypes.string.isRequired,
-    rate: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
     comment: PropTypes.string.isRequired,
     date: PropTypes.number.isRequired,
   }).isRequired,

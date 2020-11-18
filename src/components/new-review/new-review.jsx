@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const NewReview = ({onRateChange, onCommentChange}) => {
-
   return (
-
     <form
       className="reviews__form form"
       action="#"

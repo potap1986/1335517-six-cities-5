@@ -1,21 +1,41 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {createStore} from "redux";
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
+import {composeWithDevTools} from 'redux-devtools-extension';
+import {createAPI} from './services/api';
 import {Provider} from "react-redux";
 import App from "./components/app/app";
 import reviews from "./mocks/reviews";
-import {reducer} from "./store/reducer";
+import rootReducer from "./store/reducers/root-reducer";
+import {ActionCreator} from './store/action';
+import {ApiActionCreator} from './store/api-actions';
+import {AuthorizationStatus} from './const';
+import {redirect} from "./store/middlewares/redirect";
+
+const api = createAPI(
+    () => store.dispatch(ActionCreator.getAuthorization(AuthorizationStatus.NO_AUTH))
+);
 
 const store = createStore(
-    reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    rootReducer,
+    composeWithDevTools(
+        applyMiddleware(thunk.withExtraArgument(api)),
+        applyMiddleware(redirect)
+    )
 );
 
-ReactDOM.render(
-    <Provider store={store}>
-      <App
-        reviews={reviews}
-      />
-    </Provider>,
-    document.querySelector(`#root`)
-);
+Promise.all([
+  store.dispatch(ApiActionCreator.fetchOffers()),
+  // store.dispatch(ApiActionCreator.checkAuth()),
+])
+.then(() => {
+  ReactDOM.render(
+      <Provider store={store}>
+        <App
+          reviews={reviews}
+        />
+      </Provider>,
+      document.querySelector(`#root`)
+  );
+});

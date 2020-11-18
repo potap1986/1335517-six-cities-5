@@ -10,7 +10,7 @@ const OfferCard = (props) => {
       className={`place-card ${className === `cities` ? `${className}__place-card` : `${className}__card`}`}
       onMouseOver={(evt) => {
         evt.preventDefault();
-        onOfferHover();
+        onOfferHover(offer.id);
       }}>
       {offer.isPremium
         &&
@@ -24,7 +24,7 @@ const OfferCard = (props) => {
             evt.preventDefault();
             onOfferClick(offer);
           }}>
-          <img className="place-card__image" src={offer.image[0]} width={className === `favorites` ? `150` : `260`} height={className === `favorites` ? `110` : `200`} alt="Place image"/>
+          <img className="place-card__image" src={offer.previewImage} width={className === `favorites` ? `150` : `260`} height={className === `favorites` ? `110` : `200`} alt="Place image"/>
         </a>
       </div>
       <div className={`place-card__info ${className === `favorites` ? `${className}__card-info` : ``}`}>
@@ -34,12 +34,12 @@ const OfferCard = (props) => {
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
 
-          <Bookmark isBookmarked={offer.isBookmarked} className={`place-card__bookmark`} />
+          <Bookmark isFavorite={offer.isFavorite} className={`place-card__bookmark`} />
 
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${offer.rate * 100 / 5}%`}}></span>
+            <span style={{width: `${offer.rating * 100 / 5}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -67,10 +67,10 @@ OfferCard.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    image: PropTypes.array.isRequired,
+    previewImage: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    rate: PropTypes.number.isRequired,
-    isBookmarked: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     isPremium: PropTypes.bool.isRequired
   }).isRequired,
   className: PropTypes.string,

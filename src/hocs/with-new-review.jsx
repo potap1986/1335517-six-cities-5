@@ -9,7 +9,7 @@ const withNewReview = (WrappedComponentForm) => {
         id: this.props.offer.id,
         author: `Max`,
         avatar: `img/avatar-max.jpg`,
-        rate: null,
+        rating: null,
         comment: null,
         date: new Date(),
       };
@@ -18,7 +18,7 @@ const withNewReview = (WrappedComponentForm) => {
     }
 
     _handleRatingChange(evt) {
-      this.setState({rate: evt.target.value});
+      this.setState({rating: evt.target.value});
     }
 
 
@@ -29,7 +29,7 @@ const withNewReview = (WrappedComponentForm) => {
     render() {
       return <WrappedComponentForm
         {...this.props}
-        rate={this.state.rate}
+        rating={this.state.rating}
         commemt={this.state.comment}
         onRateChange={this._handleRatingChange}
         onCommentChange={this._handleTextAreaChange}

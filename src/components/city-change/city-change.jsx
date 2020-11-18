@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 const CityChange = (props) => {
-  const {currentCity, cities, onCityChange} = props;
+  const {currentCity, cities, onCityChange, allOffers} = props;
+  onCityChange(currentCity, allOffers);
 
   return (
     <section className="locations container">
@@ -13,7 +14,7 @@ const CityChange = (props) => {
             <a
               onClick={(evt) => {
                 evt.preventDefault();
-                onCityChange(city);
+                onCityChange(city, allOffers);
               }}
               className={`locations__item-link tabs__item ${city === currentCity ? `tabs__item--active` : ``}`}
               href="#">
@@ -30,11 +31,13 @@ CityChange.propTypes = {
   onCityChange: PropTypes.func.isRequired,
   cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   currentCity: PropTypes.string.isRequired,
+  allOffers: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  currentCity: state.currentCity,
-  cities: state.cities,
+  currentCity: state.APPLICATION.currentCity,
+  cities: state.DATA.cities,
+  allOffers: state.DATA.offers,
 });
 
 export {CityChange};
