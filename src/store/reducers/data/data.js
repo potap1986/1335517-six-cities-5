@@ -11,6 +11,7 @@ const getAdaptedOffers = (offers) => {
 const initialState = {
   cities: CITIES,
   offers: [],
+  offer: null,
   reviews,
 };
 
@@ -24,11 +25,16 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         offers: getAdaptedOffers(action.payload),
       });
+    case ActionType.LOAD_OFFER:
+      return extend(state, {
+        offer: adaptToClient(action.payload),
+      });
     case ActionType.LOAD_REVIEWS:
       return extend(state, {
         reviews: action.payload,
       });
-    default: return state;
+    default:
+      return state;
   }
 };
 

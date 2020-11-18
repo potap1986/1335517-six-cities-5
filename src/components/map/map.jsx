@@ -21,13 +21,18 @@ class Map extends React.PureComponent {
 
   componentDidMount() {
     const {offers} = this.props;
-    this._renderMap(offers, this._mapContainer.current);
+    if (offers.length > 0) {
+      this._renderMap(offers, this._mapContainer.current);
+
+    }
   }
 
   componentDidUpdate() {
     const {offers, hoveredOffer} = this.props;
-    this._renderOffers(offers, hoveredOffer);
-    this._map.setView([offers[0].hotelCity.location.lat, offers[0].hotelCity.location.lng], offers[0].hotelCity.location.zoom);
+    if (offers.length > 0) {
+      this._renderOffers(offers, hoveredOffer);
+      this._map.setView([offers[0].hotelCity.location.lat, offers[0].hotelCity.location.lng], offers[0].hotelCity.location.zoom);
+    }
   }
 
   _renderMap(offers, container) {

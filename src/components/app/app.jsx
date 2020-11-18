@@ -29,9 +29,8 @@ const App = () => {
         <Route exact path = {AppRoute.FAVORITES}>
           <FavoritesScreen />
         </Route>
-        <Route exact path = {AppRoute.OFFER}>
-          <OfferScreen offer={activeOffer}/>
-        </Route>
+        <Route exact path = {AppRoute.OFFER} render={(routerProps) => <OfferScreen {...routerProps} />} />
+
         <Route
           render={() => (
             <Fragment>

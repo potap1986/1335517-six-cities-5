@@ -7,6 +7,14 @@ const ApiActionCreator = {
     api.get(APIRoute.HOTELS)
       .then(({data}) => dispatch(ActionCreator.loadOffers(data)))
   ),
+  fetchOffer: (offerId) => (dispatch, _getState, api) => (
+    api.get(`${APIRoute.HOTEL}${offerId}`)
+      .then(({data}) => dispatch(ActionCreator.loadOffer(data)))
+  ),
+  fetchNearOffers: (offerId) => (dispatch, _getState, api) => (
+    api.get(`${APIRoute.HOTEL}${offerId}/nearby`)
+      .then(({data}) => dispatch(ActionCreator.loadOffer(data)))
+  ),
   checkAuth: () => (dispatch, _getState, api) => (
     api.get(APIRoute.LOGIN)
       .then(() => dispatch(ActionCreator.getAuthorization(AuthorizationStatus.AUTH)))
