@@ -106,4 +106,3 @@ const mapDispatchToProps = (dispatch) => ({
 
 export {MainPage};
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
-

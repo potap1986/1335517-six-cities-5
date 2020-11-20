@@ -1,7 +1,7 @@
 const ratingMIN = 1;
 const ratingMAX = 5;
 
-const offersQantity = 100;
+const offersQantity = 10;
 
 const Time = {
   DAY: 24 * 60 * 60 * 1000,

@@ -6,16 +6,36 @@ import Bookmark from '../bookmark/bookmark';
 import OfferCard from '../offer-card/offer-card';
 import ReviewSection from '../review-section/review-section';
 import {ActionCreator} from '../../store/action';
+import {ApiActionCreator} from "../../store/api-actions";
 
 const {setHoveredOffer} = ActionCreator;
 
 const OfferScreen = (props) => {
-  const {offer, offers, reviews, hoveredOffer, onOfferHover} = props;
-  const propertyReviews = React.useMemo(() => {
+  const {offer, nearOffers, reviews, loadOffer, loadNearOffers, loadReviews, hoveredOffer, onOfferHover} = props;
+  const getOfferId = () => props.match.params.id;
+  const idOffer = getOfferId();
+  React.useEffect(() => {
+    loadOffer(idOffer);
+    loadNearOffers(idOffer);
+    loadReviews(idOffer);
+  }, [idOffer]);
+
+  /* const propertyReviews = React.useMemo(() => {
+    if (!offer) {
+      return reviews;
+    }
     return reviews.filter((review) => review.id === offer.id);
-  }, [reviews]);
-  const indexOffer = offers.indexOf(offer);
-  const nearOffers = offers.slice(indexOffer - 1, indexOffer + 2);
+  }, [reviews]); */
+  /* const getNearOffers = () => {
+    if (!offer) {
+      return [];
+    }
+    const indexOffer = offers.indexOf(offer);
+    return offers.slice(indexOffer - 1, indexOffer + 2);
+  }; */
+  // const nearOffers = [...offers.filter((of) => of.id !== offer.id).slice(0, 3), offer];
+  // const nearOffers = getNearOffers();
+
 
   return (
     <div className="page">
@@ -23,7 +43,7 @@ const OfferScreen = (props) => {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <a className="header__logo-link" href="/">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </a>
             </div>
@@ -42,7 +62,7 @@ const OfferScreen = (props) => {
         </div>
       </header>
 
-      <main className="page__main page__main--property">
+      {offer ? <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
@@ -132,17 +152,17 @@ const OfferScreen = (props) => {
 
               </div>
 
-              <ReviewSection reviews={propertyReviews} offer={offer} />
+              <ReviewSection reviews={reviews} offer={offer} />
 
             </div>
           </div>
           <section className="property__map map">
-            <Map offers={nearOffers} hoveredOffer={hoveredOffer} />
+            {nearOffers && <Map offers={[...nearOffers, offer]} hoveredOffer={hoveredOffer} />}
           </section>
         </section>
 
 
-        <div className="container">
+        {nearOffers && <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
@@ -155,21 +175,29 @@ const OfferScreen = (props) => {
             </div>
           </section>
         </div>
-      </main>
+        }
+      </main> : <div>Загрузка</div>}
     </div>
   );
 };
 
 OfferScreen.propTypes = {
-  offer: PropTypes.object.isRequired,
-  offers: PropTypes.array.isRequired,
-  reviews: PropTypes.array.isRequired,
+  offer: PropTypes.object,
+  offers: PropTypes.array,
+  nearOffers: PropTypes.array,
+  reviews: PropTypes.array,
   hoveredOffer: PropTypes.number.isRequired,
   onOfferHover: PropTypes.func.isRequired,
+  loadOffer: PropTypes.func.isRequired,
+  loadNearOffers: PropTypes.func.isRequired,
+  loadReviews: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offers: state.APPLICATION.offersForCity,
+  nearOffers: state.DATA.nearOffers,
+  offer: state.DATA.offer,
   reviews: state.DATA.reviews,
   hoveredOffer: state.APPLICATION.hoveredOffer,
 });
@@ -178,6 +206,15 @@ const mapDispatchToProps = (dispatch) => ({
   onOfferHover(offer) {
     dispatch(setHoveredOffer(offer));
   },
+  loadOffer(offer) {
+    dispatch(ApiActionCreator.fetchOffer(offer));
+  },
+  loadNearOffers(offer) {
+    dispatch(ApiActionCreator.fetchNearOffers(offer));
+  },
+  loadReviews(reviews) {
+    dispatch(ApiActionCreator.loadReviews(reviews));
+  }
 });
 
 export {OfferScreen};

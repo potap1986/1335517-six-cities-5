@@ -6,7 +6,6 @@ import {composeWithDevTools} from 'redux-devtools-extension';
 import {createAPI} from './services/api';
 import {Provider} from "react-redux";
 import App from "./components/app/app";
-import reviews from "./mocks/reviews";
 import rootReducer from "./store/reducers/root-reducer";
 import {ActionCreator} from './store/action';
 import {ApiActionCreator} from './store/api-actions';
@@ -32,9 +31,7 @@ Promise.all([
 .then(() => {
   ReactDOM.render(
       <Provider store={store}>
-        <App
-          reviews={reviews}
-        />
+        <App />
       </Provider>,
       document.querySelector(`#root`)
   );

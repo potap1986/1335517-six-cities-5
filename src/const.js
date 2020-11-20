@@ -19,5 +19,7 @@ export const AppRoute = {
 
 export const APIRoute = {
   HOTELS: `/hotels`,
+  HOTEL: `/hotels/`,
   LOGIN: `/login`,
+  REVIEWS: `/comments`
 };

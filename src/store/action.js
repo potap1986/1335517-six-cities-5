@@ -1,6 +1,8 @@
 export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   LOAD_OFFERS: `LOAD_OFFERS`,
+  LOAD_NEAR_OFFERS: `LOAD_NEAR_OFFERS`,
+  LOAD_OFFER: `LOAD_OFFER`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_CITIES: `LOAD_CITIES`,
   SET_HOVERED_OFFER: `SET_HOVERED_OFFER`,
@@ -17,6 +19,16 @@ export const ActionCreator = {
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
     payload: offers,
+  }),
+
+  loadNearOffers: (nearOffers) => ({
+    type: ActionType.LOAD_NEAR_OFFERS,
+    payload: nearOffers,
+  }),
+
+  loadOffer: (offer) => ({
+    type: ActionType.LOAD_OFFER,
+    payload: offer,
   }),
 
   loadCities: (cities) => ({

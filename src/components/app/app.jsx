@@ -6,9 +6,11 @@ import FavoritesScreen from "../favorites-screen/favorites-screen";
 import OfferScreen from "../offer-screen/offer-screen";
 import browserHistory from "../../browser-history";
 import {AppRoute} from '../../const';
+import {ApiActionCreator} from '../../store/api-actions';
+
 
 const App = () => {
-  const [activeOffer, setActiveOffer] = React.useState(null);
+  // const [setActiveOffer] = React.useState(null);
 
   return (
     <BrowserRouter history={browserHistory}>
@@ -17,8 +19,10 @@ const App = () => {
           render={({history}) => (
             <MainPage
               onOfferClick={(offer) => {
-                setActiveOffer(offer);
+                // setActiveOffer(offer);
                 history.push(`/offer/${offer.id}`);
+                ApiActionCreator.fetchNearOffers(offer.id);
+                ApiActionCreator.loadReviews(offer.id);
               }}
             />
           )}
@@ -29,9 +33,11 @@ const App = () => {
         <Route exact path = {AppRoute.FAVORITES}>
           <FavoritesScreen />
         </Route>
-        <Route exact path = {AppRoute.OFFER}>
-          <OfferScreen offer={activeOffer}/>
-        </Route>
+        <Route exact path = {AppRoute.OFFER}
+          render={(routerProps) => {
+            return <OfferScreen {...routerProps} />;
+          }
+          } />
         <Route
           render={() => (
             <Fragment>

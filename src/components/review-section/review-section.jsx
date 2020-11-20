@@ -9,20 +9,19 @@ const NewReviewWrapped = withNewReview(NewReview);
 const ReviewSection = (props) => {
   const {reviews, offer} = props;
 
-  return (
+  return (reviews &&
     <section className="property__reviews reviews">
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews[0].reviews.length}</span></h2>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
 
       <ReviewList reviews={reviews} />
 
       <NewReviewWrapped offer={offer}/>
 
-    </section>
-  );
+    </section>);
 };
 
 ReviewSection.propTypes = {
-  reviews: PropTypes.array.isRequired,
+  reviews: PropTypes.array,
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
   }).isRequired,
