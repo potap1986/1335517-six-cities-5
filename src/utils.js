@@ -4,6 +4,8 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
+export const noop = () => {};
+
 export const getSorting = (offers, sort) => {
   switch (sort) {
     case Sorting.POPULAR:

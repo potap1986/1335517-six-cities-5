@@ -1,4 +1,5 @@
 import OfferCard from '../offer-card/offer-card';
+import {noop} from '../../utils';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
@@ -6,7 +7,6 @@ import {connect} from 'react-redux';
 const FavoritesScreen = (props) => {
   const {offers, cities} = props;
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
-  const noop = () => {};
 
   return (
     <div className="page">
@@ -38,10 +38,7 @@ const FavoritesScreen = (props) => {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              {cities.map((city, index) => (
-                React.useMemo(() => {
-                  return favoriteOffers.filter((offer) => offer.hotelCity.name === city).length > 0;
-                }, [favoriteOffers])
+              {cities.map((city, index) => (favoriteOffers.filter((offer) => offer.hotelCity.name === city).length > 0)
                 &&
                 <li key={`${city}-${index}`} className="favorites__locations-items">
                   <div className="favorites__locations locations locations--current">
@@ -60,7 +57,7 @@ const FavoritesScreen = (props) => {
                   </div>
 
                 </li>
-              ))}
+              )}
             </ul>
           </section>
         </div>

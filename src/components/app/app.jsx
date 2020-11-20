@@ -10,7 +10,6 @@ import {ApiActionCreator} from '../../store/api-actions';
 
 
 const App = () => {
-  // const [setActiveOffer] = React.useState(null);
 
   return (
     <BrowserRouter history={browserHistory}>
@@ -19,7 +18,6 @@ const App = () => {
           render={({history}) => (
             <MainPage
               onOfferClick={(offer) => {
-                // setActiveOffer(offer);
                 history.push(`/offer/${offer.id}`);
                 ApiActionCreator.fetchNearOffers(offer.id);
                 ApiActionCreator.loadReviews(offer.id);
@@ -36,8 +34,8 @@ const App = () => {
         <Route exact path = {AppRoute.OFFER}
           render={(routerProps) => {
             return <OfferScreen {...routerProps} />;
-          }
-          } />
+          }}
+        />
         <Route
           render={() => (
             <Fragment>

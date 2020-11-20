@@ -1,5 +1,4 @@
-// import reviews from '../../../mocks/reviews';
-import {CITIES} from '../../../mocks/offers';
+import {CITIES} from '../../../const';
 import {extend} from '../../../utils';
 import {ActionType} from '../../action';
 import {adaptOfferToClient, adaptReviewToClient} from '../../../store/adapters';

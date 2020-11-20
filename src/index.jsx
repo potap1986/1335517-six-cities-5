@@ -26,7 +26,6 @@ const store = createStore(
 
 Promise.all([
   store.dispatch(ApiActionCreator.fetchOffers()),
-  // store.dispatch(ApiActionCreator.checkAuth()),
 ])
 .then(() => {
   ReactDOM.render(

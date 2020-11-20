@@ -23,3 +23,5 @@ export const APIRoute = {
   LOGIN: `/login`,
   REVIEWS: `/comments`
 };
+
+export const CITIES = [`Amsterdam`, `Paris`, `Cologne`, `Brussels`, `Hamburg`, `Dusseldorf`];

@@ -1,7 +1,6 @@
 import {extend} from "../../../utils";
 import {ActionType} from "../../action";
-import {Sorting} from '../../../const';
-import {CITIES} from '../../../mocks/offers';
+import {Sorting, CITIES} from '../../../const';
 
 const initialState = {
   hoveredOffer: -1,

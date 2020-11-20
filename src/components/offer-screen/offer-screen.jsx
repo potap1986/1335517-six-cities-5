@@ -20,23 +20,6 @@ const OfferScreen = (props) => {
     loadReviews(idOffer);
   }, [idOffer]);
 
-  /* const propertyReviews = React.useMemo(() => {
-    if (!offer) {
-      return reviews;
-    }
-    return reviews.filter((review) => review.id === offer.id);
-  }, [reviews]); */
-  /* const getNearOffers = () => {
-    if (!offer) {
-      return [];
-    }
-    const indexOffer = offers.indexOf(offer);
-    return offers.slice(indexOffer - 1, indexOffer + 2);
-  }; */
-  // const nearOffers = [...offers.filter((of) => of.id !== offer.id).slice(0, 3), offer];
-  // const nearOffers = getNearOffers();
-
-
   return (
     <div className="page">
       <header className="header">
