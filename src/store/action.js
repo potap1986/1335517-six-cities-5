@@ -13,6 +13,8 @@ export const ActionType = {
   SET_CITY_OFFERS: `SET_CITY_OFFERS`,
   GET_AUTHORIZATION_STATUS: `GET_AUTHORIZATION_STATUS`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+  SIGN_IN: `SIGN_IN`,
+  UPDATE_OFFERS: `UPDATE_OFFERS`,
 };
 
 export const ActionCreator = {
@@ -82,4 +84,14 @@ export const ActionCreator = {
     type: ActionType.REDIRECT_TO_ROUTE,
     payload: url,
   }),
+
+  signIn: (user) => ({
+    type: ActionType.SIGN_IN,
+    payload: user,
+  }),
+
+  updateOffers: (offer) => ({
+    type: ActionType.UPDATE_OFFERS,
+    payload: offer,
+  })
 };

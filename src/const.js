@@ -21,7 +21,8 @@ export const APIRoute = {
   HOTELS: `/hotels`,
   HOTEL: `/hotels/`,
   LOGIN: `/login`,
-  REVIEWS: `/comments`
+  REVIEWS: `/comments`,
+  FAVORITE: `/favorite`,
 };
 
 export const CITIES = [`Amsterdam`, `Paris`, `Cologne`, `Brussels`, `Hamburg`, `Dusseldorf`];

@@ -1,15 +1,19 @@
 import React, {Fragment} from "react";
-import {Router as BrowserRouter, Route, Switch, Link} from "react-router-dom";
+import PropTypes from 'prop-types';
+import {Router as BrowserRouter, Route, Switch, Link, Redirect} from "react-router-dom";
+import {connect} from 'react-redux';
+import PrivateRoute from '../private-route/private-route';
 import MainPage from "../main-page/main-page";
 import LoginScreen from "../login-screen/login-screen";
 import FavoritesScreen from "../favorites-screen/favorites-screen";
 import OfferScreen from "../offer-screen/offer-screen";
 import browserHistory from "../../browser-history";
-import {AppRoute} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
 import {ApiActionCreator} from '../../store/api-actions';
 
 
-const App = () => {
+const App = (props) => {
+  const {authorizationStatus} = props;
 
   return (
     <BrowserRouter history={browserHistory}>
@@ -25,12 +29,10 @@ const App = () => {
             />
           )}
         />
-        <Route exact path = {AppRoute.LOGIN}>
-          <LoginScreen />
-        </Route>
-        <Route exact path = {AppRoute.FAVORITES}>
-          <FavoritesScreen />
-        </Route>
+        <Route exact path = {AppRoute.LOGIN}
+          render={(compProps) => authorizationStatus === AuthorizationStatus.NO_AUTH ? <LoginScreen {...compProps} /> : <Redirect to="/" />}
+        />
+        <PrivateRoute exact path={AppRoute.FAVORITES} render={() => <FavoritesScreen />} />
         <Route exact path = {AppRoute.OFFER}
           render={(routerProps) => {
             return <OfferScreen {...routerProps} />;
@@ -53,6 +55,12 @@ const App = () => {
   );
 };
 
-App.propTypes = {};
+App.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+};
 
-export default App;
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.USER.authorizationStatus
+});
+
+export default connect(mapStateToProps)(App);

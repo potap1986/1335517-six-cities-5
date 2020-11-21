@@ -11,10 +11,15 @@ import {ActionCreator} from './store/action';
 import {ApiActionCreator} from './store/api-actions';
 import {AuthorizationStatus} from './const';
 import {redirect} from "./store/middlewares/redirect";
+import history from './browser-history';
 
-const api = createAPI(
-    () => store.dispatch(ActionCreator.getAuthorization(AuthorizationStatus.NO_AUTH))
-);
+const dispatchCB = (...args) => store.dispatch(...args);
+const loginCB = () => history.push(`/login`);
+
+const api = createAPI(dispatchCB, loginCB);
+// const api = createAPI(
+//     () => store.dispatch(ActionCreator.getAuthorization(AuthorizationStatus.NO_AUTH))
+// );
 
 const store = createStore(
     rootReducer,
@@ -23,6 +28,8 @@ const store = createStore(
         applyMiddleware(redirect)
     )
 );
+
+// store.dispatch(ApiActionCreator.checkAuth());
 
 Promise.all([
   store.dispatch(ApiActionCreator.fetchOffers()),

@@ -102,3 +102,19 @@ export const adaptReviewToClient = (review) => {
   return adaptedReview;
 };
 
+export const adaptUserToClient = (user) => {
+  const adaptedUser = Object.assign(
+      {},
+      user,
+      {
+        isPro: user.is_pro,
+        avatarUrl: user.avatar_url
+      }
+  );
+
+  delete adaptedUser.is_pro;
+  delete adaptedUser.avatar_url;
+
+  return adaptedUser;
+};
+
