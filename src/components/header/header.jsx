@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {getUserAvatar} from '../../utils';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import { AuthorizationStatus } from '../../const';
+import {AuthorizationStatus} from '../../const';
 
 
 const Header = (props) => {

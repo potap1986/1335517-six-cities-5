@@ -7,9 +7,7 @@ import {createAPI} from './services/api';
 import {Provider} from "react-redux";
 import App from "./components/app/app";
 import rootReducer from "./store/reducers/root-reducer";
-import {ActionCreator} from './store/action';
 import {ApiActionCreator} from './store/api-actions';
-import {AuthorizationStatus} from './const';
 import {redirect} from "./store/middlewares/redirect";
 import history from './browser-history';
 
@@ -29,7 +27,7 @@ const store = createStore(
     )
 );
 
-// store.dispatch(ApiActionCreator.checkAuth());
+store.dispatch(ApiActionCreator.checkAuth());
 
 Promise.all([
   store.dispatch(ApiActionCreator.fetchOffers()),

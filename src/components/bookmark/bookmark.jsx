@@ -5,7 +5,7 @@ const Bookmark = (props) => {
   const {isFavorite, className, id, onClick} = props;
 
   return (
-    <button className={`${className}-button button ${isFavorite && `${className}-button--active`}`} type="button" onClick={() => { onClick(id, !isFavorite) }}>
+    <button className={`${className}-button button ${isFavorite && `${className}-button--active`}`} type="button" onClick={() => onClick(id, !isFavorite)}>
       <svg className={`${className}-icon`} width={className === `property__bookmark` ? `31` : `18`} height={className === `property__bookmark` ? `33` : `19`}>
         <use xlinkHref="#icon-bookmark"></use>
       </svg>

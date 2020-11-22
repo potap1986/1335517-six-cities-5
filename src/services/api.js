@@ -1,6 +1,6 @@
 import axios from "axios";
-import { AuthorizationStatus } from "../const";
-import { ActionCreator } from "../store/action";
+import {AuthorizationStatus} from "../const";
+import {ActionCreator} from "../store/action";
 
 const BACKEND_URL = `https://5.react.pages.academy/six-cities`;
 const REQUEST_TIMEOUT = 5000;

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Bookmark from '../bookmark/bookmark';
+import history from '../../browser-history';
 
 const OfferCard = (props) => {
   const {onOfferClick, onBookmarkClick, onOfferHover, offer, className} = props;
@@ -22,7 +23,7 @@ const OfferCard = (props) => {
           href="#"
           onClick={(evt) => {
             evt.preventDefault();
-            onOfferClick(offer);
+            onOfferClick(offer, history);
           }}>
           <img className="place-card__image" src={offer.previewImage} width={className === `favorites` ? `150` : `260`} height={className === `favorites` ? `110` : `200`} alt="Place image"/>
         </a>

@@ -12,7 +12,7 @@ import {ApiActionCreator} from "../../store/api-actions";
 const {setHoveredOffer} = ActionCreator;
 
 const OfferScreen = (props) => {
-  const {offer, nearOffers, reviews, loadOffer, loadNearOffers, loadReviews, hoveredOffer, onOfferHover} = props;
+  const {offer, nearOffers, reviews, loadOffer, loadNearOffers, loadReviews, postReview, hoveredOffer, onOfferHover, onBookmarkClick, authorizationStatus} = props;
   const getOfferId = () => props.match.params.id;
   const idOffer = getOfferId();
   React.useEffect(() => {
@@ -49,7 +49,7 @@ const OfferScreen = (props) => {
                   {offer.title}
                 </h1>
 
-                <Bookmark className={`property__bookmark`} isFavorite={offer.isFavorite} />
+                <Bookmark className={`property__bookmark`} isFavorite={offer.isFavorite} id={offer.id} onClick={onBookmarkClick}/>
 
               </div>
               <div className="property__rating rating">
@@ -114,7 +114,7 @@ const OfferScreen = (props) => {
 
               </div>
 
-              <ReviewSection reviews={reviews} offer={offer} />
+              <ReviewSection reviews={reviews} offer={offer} authorizationStatus={authorizationStatus} onSubmit={postReview}/>
 
             </div>
           </div>
@@ -131,7 +131,7 @@ const OfferScreen = (props) => {
 
               {nearOffers.map((otherOffer) => (
                 otherOffer !== offer &&
-                <OfferCard key={otherOffer.id} onOfferHover={onOfferHover} onOfferClick={()=>({})} offer={otherOffer} className={`near-places`}/>
+                <OfferCard key={otherOffer.id} onOfferHover={onOfferHover} onOfferClick={()=>({})} offer={otherOffer} className={`near-places`} onBookmarkClick={onBookmarkClick}/>
               ))}
 
             </div>
@@ -145,6 +145,7 @@ const OfferScreen = (props) => {
 
 OfferScreen.propTypes = {
   offer: PropTypes.object,
+  onBookmarkClick: PropTypes.func.isRequired,
   offers: PropTypes.array,
   nearOffers: PropTypes.array,
   reviews: PropTypes.array,
@@ -153,7 +154,9 @@ OfferScreen.propTypes = {
   loadOffer: PropTypes.func.isRequired,
   loadNearOffers: PropTypes.func.isRequired,
   loadReviews: PropTypes.func.isRequired,
+  postReview: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -162,6 +165,7 @@ const mapStateToProps = (state) => ({
   offer: state.DATA.offer,
   reviews: state.DATA.reviews,
   hoveredOffer: state.APPLICATION.hoveredOffer,
+  authorizationStatus: state.USER.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -176,7 +180,13 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadReviews(reviews) {
     dispatch(ApiActionCreator.loadReviews(reviews));
-  }
+  },
+  onBookmarkClick: (id, status) => {
+    dispatch(ApiActionCreator.changeOfferStatus(id, status));
+  },
+  postReview: (id, review) => {
+    dispatch(ApiActionCreator.postReview(id, review));
+  },
 });
 
 export {OfferScreen};

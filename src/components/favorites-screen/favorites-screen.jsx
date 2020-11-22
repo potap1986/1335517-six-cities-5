@@ -7,7 +7,7 @@ import Header from '../header/header';
 import {ApiActionCreator} from '../../store/api-actions';
 
 const FavoritesScreen = (props) => {
-  const {offers, cities, onBookmarkClick} = props;
+  const {offers, cities, onBookmarkClick, onOfferClick} = props;
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
 
   return (
@@ -31,7 +31,7 @@ const FavoritesScreen = (props) => {
                   <div className="favorites__places">
 
                     {favoriteOffers.filter((offer) => offer.hotelCity.name === city).map((offer) => (
-                      <OfferCard key={offer.id} onOfferHover={noop} onOfferClick={noop} offer={offer} className={`favorites`} onBookmarkClick={onBookmarkClick} />
+                      <OfferCard key={offer.id} onOfferHover={noop} onOfferClick={onOfferClick} offer={offer} className={`favorites`} onBookmarkClick={onBookmarkClick} />
                     ))}
 
                   </div>
@@ -55,6 +55,7 @@ FavoritesScreen.propTypes = {
   offers: PropTypes.array.isRequired,
   cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   onBookmarkClick: PropTypes.func.isRequired,
+  onOfferClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

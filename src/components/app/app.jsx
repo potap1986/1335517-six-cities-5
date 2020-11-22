@@ -13,26 +13,22 @@ import {ApiActionCreator} from '../../store/api-actions';
 
 
 const App = (props) => {
-  const {authorizationStatus} = props;
+  const {authorizationStatus, onOfferClick} = props;
 
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path = {AppRoute.MAIN_PAGE}
-          render={({history}) => (
+          render={() => (
             <MainPage
-              onOfferClick={(offer) => {
-                history.push(`/offer/${offer.id}`);
-                ApiActionCreator.fetchNearOffers(offer.id);
-                ApiActionCreator.loadReviews(offer.id);
-              }}
+              onOfferClick={onOfferClick}
             />
           )}
         />
         <Route exact path = {AppRoute.LOGIN}
           render={(compProps) => authorizationStatus === AuthorizationStatus.NO_AUTH ? <LoginScreen {...compProps} /> : <Redirect to="/" />}
         />
-        <PrivateRoute exact path={AppRoute.FAVORITES} render={() => <FavoritesScreen />} />
+        <PrivateRoute exact path={AppRoute.FAVORITES} render={() => <FavoritesScreen onOfferClick={onOfferClick} />} />
         <Route exact path = {AppRoute.OFFER}
           render={(routerProps) => {
             return <OfferScreen {...routerProps} />;
@@ -57,10 +53,19 @@ const App = (props) => {
 
 App.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
+  onOfferClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   authorizationStatus: state.USER.authorizationStatus
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => ({
+  onOfferClick: (offer, history) => {
+    history.push(`/offer/${offer.id}`);
+    dispatch(ApiActionCreator.fetchNearOffers(offer.id));
+    dispatch(ApiActionCreator.loadReviews(offer.id));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

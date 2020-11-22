@@ -1,5 +1,5 @@
 import React from 'react';
-import {Sorting} from './const';
+import {AuthorizationStatus, Sorting} from './const';
 
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
@@ -23,7 +23,7 @@ export const getSorting = (offers, sort) => {
 };
 
 export const getUserAvatar = (status, avatar) => {
-  return status ? `` : <img className="reviews__avatar user__avatar" src={avatar} width="54" height="54" alt="User avatar"/>;
+  return status === AuthorizationStatus.NO_AUTH ? `` : <img className="reviews__avatar user__avatar" src={avatar} width="54" height="54" alt="User avatar"/>;
 };
 
 export const updateOffers = (allOffers, newOffer) => {

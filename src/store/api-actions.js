@@ -1,6 +1,6 @@
 import {ActionCreator} from './action';
 import {AuthorizationStatus} from '../const';
-import {AppRoute, APIRoute} from '../const';
+import {APIRoute} from '../const';
 import {adaptUserToClient} from '../store/adapters';
 
 const ApiActionCreator = {
@@ -21,7 +21,7 @@ const ApiActionCreator = {
       .then((response) => {
         if (response.status === 200) {
           dispatch(ActionCreator.getAuthorization(AuthorizationStatus.AUTH));
-          dispatch(ActionCreator.signIn(response.data));
+          dispatch(ActionCreator.signIn(adaptUserToClient(response.data)));
         }
       })
   ),
@@ -49,6 +49,14 @@ const ApiActionCreator = {
     api.get(APIRoute.FAVORITE)
     .then((response) => dispatch(ActionCreator.updateOffers(response.data)));
   },
+
+  postReview: (id, review) => (dispatch, _getState, api) => {
+    api.post(`${APIRoute.REVIEWS}/${id}`, review)
+    .then((response) => {
+      dispatch(ActionCreator.loadReviews(response.data));
+    });
+  }
+
 };
 
 export {ApiActionCreator};
