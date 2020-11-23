@@ -15,9 +15,6 @@ const dispatchCB = (...args) => store.dispatch(...args);
 const loginCB = () => history.push(`/login`);
 
 const api = createAPI(dispatchCB, loginCB);
-// const api = createAPI(
-//     () => store.dispatch(ActionCreator.getAuthorization(AuthorizationStatus.NO_AUTH))
-// );
 
 const store = createStore(
     rootReducer,

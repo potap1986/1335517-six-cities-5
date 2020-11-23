@@ -7,7 +7,6 @@ import {AuthorizationStatus} from '../../const';
 
 const NewReviewWrapped = withNewReview(NewReview);
 
-
 const ReviewSection = (props) => {
   const {reviews, offer, authorizationStatus, onSubmit} = props;
 

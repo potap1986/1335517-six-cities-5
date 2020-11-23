@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../header/header';
+import {noop} from '../../utils';
 import Map from '../map/map';
 import Bookmark from '../bookmark/bookmark';
 import OfferCard from '../offer-card/offer-card';
@@ -131,7 +132,7 @@ const OfferScreen = (props) => {
 
               {nearOffers.map((otherOffer) => (
                 otherOffer !== offer &&
-                <OfferCard key={otherOffer.id} onOfferHover={onOfferHover} onOfferClick={()=>({})} offer={otherOffer} className={`near-places`} onBookmarkClick={onBookmarkClick}/>
+                <OfferCard key={otherOffer.id} onOfferHover={onOfferHover} onOfferClick={noop} offer={otherOffer} className={`near-places`} onBookmarkClick={onBookmarkClick}/>
               ))}
 
             </div>
