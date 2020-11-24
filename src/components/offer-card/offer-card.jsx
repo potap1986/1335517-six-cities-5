@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Bookmark from '../bookmark/bookmark';
+import history from '../../browser-history';
 
 const OfferCard = (props) => {
-  const {onOfferClick, onOfferHover, offer, className} = props;
+  const {onOfferClick, onBookmarkClick, onOfferHover, offer, className} = props;
 
   return (
     <article
@@ -22,7 +23,7 @@ const OfferCard = (props) => {
           href="#"
           onClick={(evt) => {
             evt.preventDefault();
-            onOfferClick(offer);
+            onOfferClick(offer, history);
           }}>
           <img className="place-card__image" src={offer.previewImage} width={className === `favorites` ? `150` : `260`} height={className === `favorites` ? `110` : `200`} alt="Place image"/>
         </a>
@@ -34,7 +35,7 @@ const OfferCard = (props) => {
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
 
-          <Bookmark isFavorite={offer.isFavorite} className={`place-card__bookmark`} />
+          <Bookmark isFavorite={offer.isFavorite} className={`place-card__bookmark`} id={offer.id} onClick={onBookmarkClick} />
 
         </div>
         <div className="place-card__rating rating">
@@ -48,7 +49,7 @@ const OfferCard = (props) => {
             href="#"
             onClick={(evt) => {
               evt.preventDefault();
-              onOfferClick();
+              onOfferClick(offer, history);
             }}>
             {offer.title}
           </a>
@@ -62,6 +63,7 @@ const OfferCard = (props) => {
 
 OfferCard.propTypes = {
   onOfferClick: PropTypes.func.isRequired,
+  onBookmarkClick: PropTypes.func.isRequired,
   onOfferHover: PropTypes.func.isRequired,
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
@@ -76,4 +78,4 @@ OfferCard.propTypes = {
   className: PropTypes.string,
 };
 
-export default OfferCard;
+export default React.memo(OfferCard);

@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import OfferCard from '../offer-card/offer-card';
 import {connect} from 'react-redux';
 import {getSorting} from '../../utils';
+import {ApiActionCreator} from '../../store/api-actions';
 
 const OfferList = (props) => {
-  const {offers, sorting, onOfferClick, onOfferHover} = props;
+  const {offers, sorting, onOfferClick, onOfferHover, onBookmarkClick} = props;
   const sortedOffers = getSorting(offers, sorting);
   return (
     <div className="cities__places-list places__list tabs__content">
@@ -16,6 +17,7 @@ const OfferList = (props) => {
           onOfferHover={onOfferHover}
           onOfferClick={onOfferClick}
           className={`cities`}
+          onBookmarkClick={onBookmarkClick}
         />
       ))}
     </div>
@@ -25,6 +27,7 @@ const OfferList = (props) => {
 OfferList.propTypes = {
   offers: PropTypes.array.isRequired,
   onOfferClick: PropTypes.func.isRequired,
+  onBookmarkClick: PropTypes.func.isRequired,
   onOfferHover: PropTypes.func.isRequired,
   sorting: PropTypes.string.isRequired,
 };
@@ -34,4 +37,11 @@ const mapStateToProps = (state) => ({
   sorting: state.APPLICATION.sortType,
 });
 
-export default connect(mapStateToProps)(OfferList);
+const mapDispatchToProps = (dispatch) => ({
+  onBookmarkClick: (id, status) => {
+    dispatch(ApiActionCreator.changeOfferStatus(id, status));
+    dispatch(ApiActionCreator.fetchOffers());
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(OfferList);

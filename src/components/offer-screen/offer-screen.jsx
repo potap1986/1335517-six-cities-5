@@ -1,48 +1,31 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import Header from '../header/header';
+import {noop} from '../../utils';
 import Map from '../map/map';
 import Bookmark from '../bookmark/bookmark';
 import OfferCard from '../offer-card/offer-card';
 import ReviewSection from '../review-section/review-section';
 import {ActionCreator} from '../../store/action';
+import {ApiActionCreator} from "../../store/api-actions";
 
 const {setHoveredOffer} = ActionCreator;
 
 const OfferScreen = (props) => {
-  const {offer, offers, reviews, hoveredOffer, onOfferHover} = props;
-  const propertyReviews = React.useMemo(() => {
-    return reviews.filter((review) => review.id === offer.id);
-  }, [reviews]);
-  const indexOffer = offers.indexOf(offer);
-  const nearOffers = offers.slice(indexOffer - 1, indexOffer + 2);
+  const {offer, nearOffers, reviews, loadOffer, loadNearOffers, loadReviews, postReview, hoveredOffer, onOfferHover, onBookmarkClick, authorizationStatus} = props;
+  const getOfferId = () => props.match.params.id;
+  const idOffer = getOfferId();
+  React.useEffect(() => {
+    loadOffer(idOffer);
+    loadNearOffers(idOffer);
+    loadReviews(idOffer);
+  }, [idOffer]);
 
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <a className="header__logo-link" href="main.html">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </a>
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
-
-      <main className="page__main page__main--property">
+      <Header />
+      {offer ? <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
@@ -67,7 +50,7 @@ const OfferScreen = (props) => {
                   {offer.title}
                 </h1>
 
-                <Bookmark className={`property__bookmark`} isFavorite={offer.isFavorite} />
+                <Bookmark className={`property__bookmark`} isFavorite={offer.isFavorite} id={offer.id} onClick={onBookmarkClick}/>
 
               </div>
               <div className="property__rating rating">
@@ -132,51 +115,78 @@ const OfferScreen = (props) => {
 
               </div>
 
-              <ReviewSection reviews={propertyReviews} offer={offer} />
+              <ReviewSection reviews={reviews} offer={offer} authorizationStatus={authorizationStatus} onSubmit={postReview}/>
 
             </div>
           </div>
           <section className="property__map map">
-            <Map offers={nearOffers} hoveredOffer={hoveredOffer} />
+            {nearOffers && <Map offers={[...nearOffers, offer]} hoveredOffer={hoveredOffer} />}
           </section>
         </section>
 
 
-        <div className="container">
+        {nearOffers && <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
 
               {nearOffers.map((otherOffer) => (
                 otherOffer !== offer &&
-                <OfferCard key={otherOffer.id} onOfferHover={onOfferHover} onOfferClick={()=>({})} offer={otherOffer} className={`near-places`}/>
+                <OfferCard key={otherOffer.id} onOfferHover={onOfferHover} onOfferClick={noop} offer={otherOffer} className={`near-places`} onBookmarkClick={onBookmarkClick}/>
               ))}
 
             </div>
           </section>
         </div>
-      </main>
+        }
+      </main> : <div>Загрузка</div>}
     </div>
   );
 };
 
 OfferScreen.propTypes = {
-  offer: PropTypes.object.isRequired,
-  offers: PropTypes.array.isRequired,
-  reviews: PropTypes.array.isRequired,
+  offer: PropTypes.object,
+  onBookmarkClick: PropTypes.func.isRequired,
+  offers: PropTypes.array,
+  nearOffers: PropTypes.array,
+  reviews: PropTypes.array,
   hoveredOffer: PropTypes.number.isRequired,
   onOfferHover: PropTypes.func.isRequired,
+  loadOffer: PropTypes.func.isRequired,
+  loadNearOffers: PropTypes.func.isRequired,
+  loadReviews: PropTypes.func.isRequired,
+  postReview: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offers: state.APPLICATION.offersForCity,
+  nearOffers: state.DATA.nearOffers,
+  offer: state.DATA.offer,
   reviews: state.DATA.reviews,
   hoveredOffer: state.APPLICATION.hoveredOffer,
+  authorizationStatus: state.USER.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onOfferHover(offer) {
     dispatch(setHoveredOffer(offer));
+  },
+  loadOffer(offer) {
+    dispatch(ApiActionCreator.fetchOffer(offer));
+  },
+  loadNearOffers(offer) {
+    dispatch(ApiActionCreator.fetchNearOffers(offer));
+  },
+  loadReviews(reviews) {
+    dispatch(ApiActionCreator.loadReviews(reviews));
+  },
+  onBookmarkClick: (id, status) => {
+    dispatch(ApiActionCreator.changeOfferStatus(id, status));
+  },
+  postReview: (id, review) => {
+    dispatch(ApiActionCreator.postReview(id, review));
   },
 });
 

@@ -1,37 +1,39 @@
 import React, {Fragment} from "react";
-import {Router as BrowserRouter, Route, Switch, Link} from "react-router-dom";
+import PropTypes from 'prop-types';
+import {Router as BrowserRouter, Route, Switch, Link, Redirect} from "react-router-dom";
+import {connect} from 'react-redux';
+import PrivateRoute from '../private-route/private-route';
 import MainPage from "../main-page/main-page";
 import LoginScreen from "../login-screen/login-screen";
 import FavoritesScreen from "../favorites-screen/favorites-screen";
 import OfferScreen from "../offer-screen/offer-screen";
 import browserHistory from "../../browser-history";
-import {AppRoute} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
+import {ApiActionCreator} from '../../store/api-actions';
 
-const App = () => {
-  const [activeOffer, setActiveOffer] = React.useState(null);
+
+const App = (props) => {
+  const {authorizationStatus, onOfferClick} = props;
 
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path = {AppRoute.MAIN_PAGE}
-          render={({history}) => (
+          render={() => (
             <MainPage
-              onOfferClick={(offer) => {
-                setActiveOffer(offer);
-                history.push(`/offer/${offer.id}`);
-              }}
+              onOfferClick={onOfferClick}
             />
           )}
         />
-        <Route exact path = {AppRoute.LOGIN}>
-          <LoginScreen />
-        </Route>
-        <Route exact path = {AppRoute.FAVORITES}>
-          <FavoritesScreen />
-        </Route>
-        <Route exact path = {AppRoute.OFFER}>
-          <OfferScreen offer={activeOffer}/>
-        </Route>
+        <Route exact path = {AppRoute.LOGIN}
+          render={(compProps) => authorizationStatus === AuthorizationStatus.NO_AUTH ? <LoginScreen {...compProps} /> : <Redirect to="/" />}
+        />
+        <PrivateRoute exact path={AppRoute.FAVORITES} render={() => <FavoritesScreen onOfferClick={onOfferClick} />} />
+        <Route exact path = {AppRoute.OFFER}
+          render={(routerProps) => {
+            return <OfferScreen {...routerProps} />;
+          }}
+        />
         <Route
           render={() => (
             <Fragment>
@@ -49,6 +51,21 @@ const App = () => {
   );
 };
 
-App.propTypes = {};
+App.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+  onOfferClick: PropTypes.func.isRequired,
+};
 
-export default App;
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.USER.authorizationStatus
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onOfferClick: (offer, history) => {
+    history.push(`/offer/${offer.id}`);
+    dispatch(ApiActionCreator.fetchNearOffers(offer.id));
+    dispatch(ApiActionCreator.loadReviews(offer.id));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -13,10 +13,10 @@ const ReviewItem = (props) => {
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src={`${review.avatar}`} width="54" height="54" alt={`${review.author} avatar`}/>
+          <img className="reviews__avatar user__avatar" src={`${review.localUser.avatarUrl}`} width="54" height="54" alt={`${review.localUser.author} avatar`}/>
         </div>
         <span className="reviews__user-name">
-          {review.author}
+          {review.localUser.author}
         </span>
       </div>
       <div className="reviews__info">
@@ -29,7 +29,7 @@ const ReviewItem = (props) => {
         <p className="reviews__text">
           {review.comment}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">{formatDateString(review.date)}</time> {/* пока оставлю дату нетронутой */}
+        <time className="reviews__time" dateTime="2019-04-24">{formatDateString(review.date)}</time>
       </div>
     </li>
   );
@@ -37,11 +37,10 @@ const ReviewItem = (props) => {
 
 ReviewItem.propTypes = {
   review: PropTypes.shape({
-    author: PropTypes.string.isRequired,
-    avatar: PropTypes.string.isRequired,
+    localUser: PropTypes.object.isRequired,
     rating: PropTypes.number.isRequired,
     comment: PropTypes.string.isRequired,
-    date: PropTypes.number.isRequired,
+    date: PropTypes.string.isRequired,
   }).isRequired,
 };
 

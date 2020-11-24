@@ -1,47 +1,24 @@
 import OfferCard from '../offer-card/offer-card';
+import {noop} from '../../utils';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import Header from '../header/header';
+import {ApiActionCreator} from '../../store/api-actions';
 
 const FavoritesScreen = (props) => {
-  const {offers, cities} = props;
+  const {offers, cities, onBookmarkClick, onOfferClick} = props;
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
-  const noop = () => {};
 
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <a className="header__logo-link" href="main.html">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </a>
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
-
+      <Header />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              {cities.map((city, index) => (
-                React.useMemo(() => {
-                  return favoriteOffers.filter((offer) => offer.hotelCity.name === city).length > 0;
-                }, [favoriteOffers])
+              {cities.map((city, index) => (favoriteOffers.filter((offer) => offer.hotelCity.name === city).length > 0)
                 &&
                 <li key={`${city}-${index}`} className="favorites__locations-items">
                   <div className="favorites__locations locations locations--current">
@@ -54,13 +31,13 @@ const FavoritesScreen = (props) => {
                   <div className="favorites__places">
 
                     {favoriteOffers.filter((offer) => offer.hotelCity.name === city).map((offer) => (
-                      <OfferCard key={offer.id} onOfferHover={noop()} onOfferClick={noop()} offer={offer} className={`favorites`}/>
+                      <OfferCard key={offer.id} onOfferHover={noop} onOfferClick={onOfferClick} offer={offer} className={`favorites`} onBookmarkClick={onBookmarkClick} />
                     ))}
 
                   </div>
 
                 </li>
-              ))}
+              )}
             </ul>
           </section>
         </div>
@@ -77,6 +54,8 @@ const FavoritesScreen = (props) => {
 FavoritesScreen.propTypes = {
   offers: PropTypes.array.isRequired,
   cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  onBookmarkClick: PropTypes.func.isRequired,
+  onOfferClick: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -84,5 +63,12 @@ const mapStateToProps = (state) => ({
   cities: state.DATA.cities,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onBookmarkClick: (id, status) => {
+    dispatch(ApiActionCreator.changeOfferStatus(id, status));
+    dispatch(ApiActionCreator.fetchOffers());
+  }
+});
+
 export {FavoritesScreen};
-export default connect(mapStateToProps)(FavoritesScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(FavoritesScreen);

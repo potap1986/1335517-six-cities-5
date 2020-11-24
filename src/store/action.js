@@ -1,6 +1,8 @@
 export const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   LOAD_OFFERS: `LOAD_OFFERS`,
+  LOAD_NEAR_OFFERS: `LOAD_NEAR_OFFERS`,
+  LOAD_OFFER: `LOAD_OFFER`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_CITIES: `LOAD_CITIES`,
   SET_HOVERED_OFFER: `SET_HOVERED_OFFER`,
@@ -11,12 +13,24 @@ export const ActionType = {
   SET_CITY_OFFERS: `SET_CITY_OFFERS`,
   GET_AUTHORIZATION_STATUS: `GET_AUTHORIZATION_STATUS`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+  SIGN_IN: `SIGN_IN`,
+  UPDATE_OFFERS: `UPDATE_OFFERS`,
 };
 
 export const ActionCreator = {
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
     payload: offers,
+  }),
+
+  loadNearOffers: (nearOffers) => ({
+    type: ActionType.LOAD_NEAR_OFFERS,
+    payload: nearOffers,
+  }),
+
+  loadOffer: (offer) => ({
+    type: ActionType.LOAD_OFFER,
+    payload: offer,
   }),
 
   loadCities: (cities) => ({
@@ -70,4 +84,14 @@ export const ActionCreator = {
     type: ActionType.REDIRECT_TO_ROUTE,
     payload: url,
   }),
+
+  signIn: (user) => ({
+    type: ActionType.SIGN_IN,
+    payload: user,
+  }),
+
+  updateOffers: (offer) => ({
+    type: ActionType.UPDATE_OFFERS,
+    payload: offer,
+  })
 };

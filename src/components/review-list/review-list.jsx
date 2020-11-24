@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CommentsList from '../comments-list/comments-list';
+import ReviewItem from '../review-item/review-item';
 
 const ReviewList = (props) => {
   const {reviews} = props;
 
   return (
     <ul className="reviews__list">
-      {reviews.map((comments, index) => (
-        <CommentsList
-          key={`${comments.id}-${index}`}
-          comments={comments}
+      {reviews.map((review, index) => (
+        <ReviewItem
+          key={`${review.id}-${index}`}
+          review={review}
         />
       ))}
     </ul>

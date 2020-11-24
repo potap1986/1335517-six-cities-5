@@ -1,4 +1,4 @@
-export const adaptToClient = (offer) => {
+export const adaptOfferToClient = (offer) => {
   const adaptedOffer = Object.assign(
       {},
       offer,
@@ -41,7 +41,7 @@ export const adaptToClient = (offer) => {
   return adaptedOffer;
 };
 
-export const adaptToServer = (offer) => {
+export const adaptOffersToServer = (offer) => {
   const adaptedOffer = Object.assign(
       {},
       offer,
@@ -82,3 +82,39 @@ export const adaptToServer = (offer) => {
 
   return adaptedOffer;
 };
+
+export const adaptReviewToClient = (review) => {
+  const adaptedReview = Object.assign(
+      {},
+      review,
+      {
+        localUser: {
+          id: review.user.id,
+          name: review.user.name,
+          isPro: review.user.is_pro,
+          avatarUrl: review.user.avatar_url
+        },
+      }
+  );
+
+  delete adaptedReview.user;
+
+  return adaptedReview;
+};
+
+export const adaptUserToClient = (user) => {
+  const adaptedUser = Object.assign(
+      {},
+      user,
+      {
+        isPro: user.is_pro,
+        avatarUrl: user.avatar_url
+      }
+  );
+
+  delete adaptedUser.is_pro;
+  delete adaptedUser.avatar_url;
+
+  return adaptedUser;
+};
+
