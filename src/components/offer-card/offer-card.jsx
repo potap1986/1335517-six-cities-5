@@ -49,7 +49,7 @@ const OfferCard = (props) => {
             href="#"
             onClick={(evt) => {
               evt.preventDefault();
-              onOfferClick();
+              onOfferClick(offer, history);
             }}>
             {offer.title}
           </a>
@@ -78,4 +78,4 @@ OfferCard.propTypes = {
   className: PropTypes.string,
 };
 
-export default OfferCard;
+export default React.memo(OfferCard);
