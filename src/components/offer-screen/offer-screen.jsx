@@ -15,6 +15,9 @@ const {setHoveredOffer} = ActionCreator;
 const OfferScreen = (props) => {
   const {offer, nearOffers, reviews, loadOffer, loadNearOffers, loadReviews, postReview, hoveredOffer, onOfferHover, onBookmarkClick, authorizationStatus} = props;
   const getOfferId = () => props.match.params.id;
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [offer]);
   const idOffer = getOfferId();
   React.useEffect(() => {
     loadOffer(idOffer);

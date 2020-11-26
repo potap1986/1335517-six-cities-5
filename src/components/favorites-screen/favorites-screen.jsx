@@ -15,31 +15,41 @@ const FavoritesScreen = (props) => {
       <Header />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              {cities.map((city, index) => (favoriteOffers.filter((offer) => offer.hotelCity.name === city).length > 0)
-                &&
-                <li key={`${city}-${index}`} className="favorites__locations-items">
-                  <div className="favorites__locations locations locations--current">
-                    <div className="locations__item">
-                      <a className="locations__item-link" href="#">
-                        <span>{city}</span>
-                      </a>
+          {favoriteOffers.lenght === 0 ?
+            <section classNlass="favorites favorites--empty">
+              <h1 classNlass="visually-hidden">Favorites (empty)</h1>
+              <div classNlass="favorites__status-wrapper">
+                <b classNlass="favorites__status">Nothing yet saved.</b>
+                <p classNlass="favorites__status-description">Save properties to narrow down search or plan yor future trips.</p>
+              </div>
+            </section>
+            :
+            <section className="favorites">
+              <h1 className="favorites__title">Saved listing</h1>
+              <ul className="favorites__list">
+                {cities.map((city, index) => (favoriteOffers.filter((offer) => offer.hotelCity.name === city).length > 0)
+                  &&
+                  <li key={`${city}-${index}`} className="favorites__locations-items">
+                    <div className="favorites__locations locations locations--current">
+                      <div className="locations__item">
+                        <a className="locations__item-link" href="#">
+                          <span>{city}</span>
+                        </a>
+                      </div>
                     </div>
-                  </div>
-                  <div className="favorites__places">
+                    <div className="favorites__places">
 
-                    {favoriteOffers.filter((offer) => offer.hotelCity.name === city).map((offer) => (
-                      <OfferCard key={offer.id} onOfferHover={noop} onOfferClick={onOfferClick} offer={offer} className={`favorites`} onBookmarkClick={onBookmarkClick} />
-                    ))}
+                      {favoriteOffers.filter((offer) => offer.hotelCity.name === city).map((offer) => (
+                        <OfferCard key={offer.id} onOfferHover={noop} onOfferClick={onOfferClick} offer={offer} className={`favorites`} onBookmarkClick={onBookmarkClick} />
+                      ))}
 
-                  </div>
+                    </div>
 
-                </li>
-              )}
-            </ul>
-          </section>
+                  </li>
+                )}
+              </ul>
+            </section>
+          }
         </div>
       </main>
       <footer className="footer container">

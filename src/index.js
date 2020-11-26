@@ -9,14 +9,11 @@ import App from "./components/app/app";
 import rootReducer from "./store/reducers/root-reducer";
 import {ApiActionCreator} from './store/api-actions';
 import {redirect} from "./store/middlewares/redirect";
-
-import history from './browser-history';
 import 'leaflet/dist/leaflet.css';
 
 const dispatchCB = (...args) => store.dispatch(...args);
-const loginCB = () => history.push(`/login`);
 
-const api = createAPI(dispatchCB, loginCB);
+const api = createAPI(dispatchCB);
 
 const store = createStore(
     rootReducer,
