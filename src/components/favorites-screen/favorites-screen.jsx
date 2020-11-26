@@ -15,7 +15,7 @@ const FavoritesScreen = (props) => {
       <Header />
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
-          {favoriteOffers.lenght === 0 ?
+          {favoriteOffers.length === 0 ?
             <section classNlass="favorites favorites--empty">
               <h1 classNlass="visually-hidden">Favorites (empty)</h1>
               <div classNlass="favorites__status-wrapper">
