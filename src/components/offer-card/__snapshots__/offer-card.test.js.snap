@@ -14,20 +14,7 @@ exports[`OfferCard correctly renders after relaunch 1`] = `
   </div>
   <div
     className="place-card__image-wrapper main__image-wrapper"
-  >
-    <a
-      href="#"
-      onClick={[Function]}
-    >
-      <img
-        alt="Place image"
-        className="place-card__image"
-        height="200"
-        src="mock"
-        width="260"
-      />
-    </a>
-  </div>
+  />
   <div
     className="place-card__info "
   >
@@ -78,14 +65,7 @@ exports[`OfferCard correctly renders after relaunch 1`] = `
     </div>
     <h2
       className="place-card__name"
-    >
-      <a
-        href="#"
-        onClick={[Function]}
-      >
-        mock
-      </a>
-    </h2>
+    />
     <p
       className="place-card__type"
     >

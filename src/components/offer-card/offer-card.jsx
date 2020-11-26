@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Bookmark from '../bookmark/bookmark';
 import history from '../../browser-history';
@@ -9,8 +10,7 @@ const OfferCard = (props) => {
   return (
     <article
       className={`place-card ${className === `cities` ? `${className}__place-card` : `${className}__card`}`}
-      onMouseOver={(evt) => {
-        evt.preventDefault();
+      onMouseOver={() => {
         onOfferHover(offer.id);
       }}>
       {offer.isPremium
@@ -19,14 +19,13 @@ const OfferCard = (props) => {
           <span>Premium</span>
         </div>}
       <div className={`place-card__image-wrapper ${className}__image-wrapper`}>
-        <a
-          href="#"
-          onClick={(evt) => {
-            evt.preventDefault();
+        <Link
+          to={`/offer/` + offer.id}
+          onClick={() => {
             onOfferClick(offer, history);
           }}>
           <img className="place-card__image" src={offer.previewImage} width={className === `favorites` ? `150` : `260`} height={className === `favorites` ? `110` : `200`} alt="Place image"/>
-        </a>
+        </Link >
       </div>
       <div className={`place-card__info ${className === `favorites` ? `${className}__card-info` : ``}`}>
         <div className="place-card__price-wrapper">
@@ -45,14 +44,13 @@ const OfferCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a
-            href="#"
-            onClick={(evt) => {
-              evt.preventDefault();
-              onOfferClick();
+          <Link
+            to={`/offer/` + offer.id}
+            onClick={() => {
+              onOfferClick(offer, history);
             }}>
             {offer.title}
-          </a>
+          </Link >
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

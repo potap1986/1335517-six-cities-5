@@ -115,7 +115,7 @@ exports[`<FavoritesScreen /> render correctly renders Favorites Screen w/ offers
                   className="place-card__image-wrapper favorites__image-wrapper"
                 >
                   <a
-                    href="#"
+                    href="/offer/1"
                     onClick={[Function]}
                   >
                     <img
@@ -193,7 +193,7 @@ exports[`<FavoritesScreen /> render correctly renders Favorites Screen w/ offers
                     className="place-card__name"
                   >
                     <a
-                      href="#"
+                      href="/offer/1"
                       onClick={[Function]}
                     >
                       mock
@@ -221,7 +221,7 @@ exports[`<FavoritesScreen /> render correctly renders Favorites Screen w/ offers
                   className="place-card__image-wrapper favorites__image-wrapper"
                 >
                   <a
-                    href="#"
+                    href="/offer/2"
                     onClick={[Function]}
                   >
                     <img
@@ -299,7 +299,7 @@ exports[`<FavoritesScreen /> render correctly renders Favorites Screen w/ offers
                     className="place-card__name"
                   >
                     <a
-                      href="#"
+                      href="/offer/2"
                       onClick={[Function]}
                     >
                       mock

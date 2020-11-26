@@ -2,6 +2,8 @@
 import OfferCard from './offer-card';
 import {shallow} from 'enzyme';
 
+jest.mock(`../bookmark/bookmark`, () => `Bookmark`);
+
 const offers = [{
   hotelCity: {
     name: `Lafayette`,
@@ -80,21 +82,17 @@ it(`Correct info in callbacks in Card component`, () => {
   const card = shallow(
       <OfferCard
         offer={offers[0]}
-        id={0}
         onOfferHover={onOfferHover}
         onOfferClick={onOfferClick}
         onBookmarkClick={onBookmarkClick}
-        isFavorite={false}
+        className={`main`}
       />
   );
 
   const cardNode = card.find(`article`);
   const link = card.find(`.place-card__name Link`);
-  const bookmark = card.find(`button`);
-  cardNode.simulate(`mouseEnter`);
+  cardNode.simulate(`mouseover`);
   link.simulate(`click`);
-  bookmark.simulate(`click`);
-  expect(onOfferHover).toHaveBeenCalledWith(0);
-  expect(onOfferClick).toHaveBeenCalledWith(0);
-  expect(onBookmarkClick).toHaveBeenCalledWith(0, 1);
+  expect(onOfferHover).toHaveBeenCalled();
+  expect(onOfferClick).toHaveBeenCalled();
 });
