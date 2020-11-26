@@ -47,6 +47,7 @@ const OfferCard = (props) => {
           <Link
             to={`/offer/` + offer.id}
             onClick={() => {
+
               onOfferClick(offer, history);
             }}>
             {offer.title}
@@ -76,4 +77,4 @@ OfferCard.propTypes = {
   className: PropTypes.string,
 };
 
-export default OfferCard;
+export default React.memo(OfferCard);

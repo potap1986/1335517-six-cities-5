@@ -38,7 +38,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onBookmarkClick: (id, status) => dispatch(ApiActionCreator.changeOfferStatus(id, status))
+  onBookmarkClick: (id, status) => {
+    dispatch(ApiActionCreator.changeOfferStatus(id, status));
+    dispatch(ApiActionCreator.fetchOffers());
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OfferList);

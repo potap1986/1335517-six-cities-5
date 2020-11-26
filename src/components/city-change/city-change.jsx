@@ -41,4 +41,4 @@ const mapStateToProps = (state) => ({
 });
 
 export {CityChange};
-export default connect(mapStateToProps)(CityChange);
+export default connect(mapStateToProps)(React.memo(CityChange));
