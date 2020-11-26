@@ -9,6 +9,7 @@ import App from "./components/app/app";
 import rootReducer from "./store/reducers/root-reducer";
 import {ApiActionCreator} from './store/api-actions';
 import {redirect} from "./store/middlewares/redirect";
+import 'leaflet/dist/leaflet.css';
 
 const dispatchCB = (...args) => store.dispatch(...args);
 

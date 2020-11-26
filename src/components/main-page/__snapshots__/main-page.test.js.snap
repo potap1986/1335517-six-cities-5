@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main screen correctly renders after relaunch 1`] = `
+<div
+  className="page page--gray page--main"
+>
+  <Header />
+  <main
+    className="page__main page__main--index"
+  >
+    <h1
+      className="visually-hidden"
+    >
+      Cities
+    </h1>
+    <div
+      className="tabs"
+    >
+      <CityChange
+        onCityChange={[MockFunction]}
+      />
+    </div>
+    <div
+      className="cities"
+    >
+      <div
+        className="cities__places-container container"
+      >
+        <section
+          className="cities__places places"
+        >
+          <h2
+            className="visually-hidden"
+          >
+            Places
+          </h2>
+          <b
+            className="places__found"
+          >
+            2 places
+             to stay in 
+            Berlin
+          </b>
+          <Sort
+            onSortTypeClick={[MockFunction]}
+          />
+          <OfferList
+            onOfferClick={[MockFunction]}
+            onOfferHover={[MockFunction]}
+          />
+        </section>
+        <div
+          className="cities__right-section"
+        >
+          <section
+            className="cities__map map"
+          >
+            <Map
+              hoveredOffer={0}
+              offers={
+                Array [
+                  Object {
+                    "adults": 2,
+                    "bedrooms": 2,
+                    "coordinates": Object {
+                      "lat": 50,
+                      "lng": 50,
+                      "zoom": 16,
+                    },
+                    "description": "Mock. Mock.",
+                    "goods": Array [
+                      "mock",
+                      "mock",
+                    ],
+                    "hotelCity": Object {
+                      "location": Object {
+                        "lat": 30,
+                        "lng": 19,
+                        "zoom": 16,
+                      },
+                      "name": "Lafayette",
+                    },
+                    "hotelHost": Object {
+                      "avatarUrl": "mock",
+                      "id": 2,
+                      "isPro": true,
+                      "name": "John Doe",
+                    },
+                    "id": 1,
+                    "images": Array [
+                      "mock",
+                      "mock",
+                    ],
+                    "isFavorite": true,
+                    "isPremium": true,
+                    "previewImage": "mock",
+                    "price": 22,
+                    "rating": 5,
+                    "title": "mock",
+                    "type": "hotel",
+                  },
+                  Object {
+                    "adults": 2,
+                    "bedrooms": 2,
+                    "coordinates": Object {
+                      "lat": 50,
+                      "lng": 50,
+                      "zoom": 16,
+                    },
+                    "description": "Mock. Mock.",
+                    "goods": Array [
+                      "mock",
+                      "mock",
+                    ],
+                    "hotelCity": Object {
+                      "location": Object {
+                        "lat": 30,
+                        "lng": 19,
+                        "zoom": 16,
+                      },
+                      "name": "Lafayette",
+                    },
+                    "hotelHost": Object {
+                      "avatarUrl": "mock",
+                      "id": 2,
+                      "isPro": true,
+                      "name": "John Doe",
+                    },
+                    "id": 2,
+                    "images": Array [
+                      "mock",
+                      "mock",
+                    ],
+                    "isFavorite": true,
+                    "isPremium": true,
+                    "previewImage": "mock",
+                    "price": 22,
+                    "rating": 5,
+                    "title": "mock",
+                    "type": "hotel",
+                  },
+                ]
+              }
+            />
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+`;

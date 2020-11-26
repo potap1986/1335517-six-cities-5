@@ -42,8 +42,6 @@ const ApiActionCreator = {
     .then((response) => {
       dispatch(ActionCreator.updateOffers(response.data));
     });
-    // api.get(APIRoute.HOTELS)
-    // .then(({data}) => dispatch(ActionCreator.loadOffers(data)));
   },
   getFavoriteOffers: () => (dispatch, _getState, api) => {
     api.get(APIRoute.FAVORITE)

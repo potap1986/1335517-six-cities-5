@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ReviewList /> render correctly renders Review List w/ reviews 1`] = `
+<ul
+  className="reviews__list"
+>
+  <ReviewItem
+    review={
+      Object {
+        "comment": "qwerty",
+        "date": "2020-11-05T13:38:44.753Z",
+        "id": 1,
+        "localUser": Object {
+          "avatarUrl": "url",
+          "id": 1,
+          "isPro": true,
+          "name": "Mark Goldberg",
+        },
+        "rating": 1,
+      }
+    }
+  />
+  <ReviewItem
+    review={
+      Object {
+        "comment": "qwertmmy",
+        "date": "2020-12-05T13:38:44.753Z",
+        "id": 2,
+        "localUser": Object {
+          "avatarUrl": "url",
+          "id": 1,
+          "isPro": true,
+          "name": "Mark Goldberg",
+        },
+        "rating": 2,
+      }
+    }
+  />
+</ul>
+`;

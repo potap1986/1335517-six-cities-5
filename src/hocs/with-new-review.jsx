@@ -6,8 +6,8 @@ const withNewReview = (WrappedComponentForm) => {
     constructor(props) {
       super(props);
       this.state = {
-        rating: null,
-        review: null,
+        rating: 0,
+        review: ``,
         isValid: false,
       };
 
@@ -35,14 +35,16 @@ const withNewReview = (WrappedComponentForm) => {
       const {name, value} = evt.target;
       this.setState({
         [name]: value,
-      });
+      },
+      () => this._validateReview(this.state)
+      );
       this._validateReview(this.state);
     }
 
     _resetForm() {
       this.setState({
-        rating: null,
-        review: null,
+        rating: 0,
+        review: ``,
         isValid: false,
       });
       this._markRef.current.setCustomValidity(``);
@@ -51,7 +53,7 @@ const withNewReview = (WrappedComponentForm) => {
     }
 
     _validateReview(state) {
-      if (state.rating === null) {
+      if (state.rating === 0) {
         this.setState({isValid: false});
         this._markRef.current.setCustomValidity(`Choose the mark`);
       } else {
