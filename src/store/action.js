@@ -8,7 +8,6 @@ export const ActionType = {
   SET_HOVERED_OFFER: `SET_HOVERED_OFFER`,
   SET_SORT_TYPE: `SET_SORT_TYPE`,
   RESET_SORT_TYPE: `RESET_SORT_TYPE`,
-  RESET_HOVERED_OFFER: `RESET_HOVERED_OFFER`,
   RESET_SORTED_OFFERS: `RESET_SORTED_OFFERS`,
   SET_CITY_OFFERS: `SET_CITY_OFFERS`,
   GET_AUTHORIZATION_STATUS: `GET_AUTHORIZATION_STATUS`,
@@ -62,10 +61,6 @@ export const ActionCreator = {
     type: ActionType.RESET_SORT_TYPE,
   }),
 
-  resetHoveredOffer: () => ({
-    type: ActionType.RESET_HOVERED_OFFER,
-  }),
-
   resetSortedOffers: () => ({
     type: ActionType.RESET_SORTED_OFFERS,
   }),
@@ -90,8 +85,8 @@ export const ActionCreator = {
     payload: user,
   }),
 
-  updateOffers: (offer) => ({
+  /* updateOffers: (offer) => ({
     type: ActionType.UPDATE_OFFERS,
     payload: offer,
-  })
+  }) */
 };

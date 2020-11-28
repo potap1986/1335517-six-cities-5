@@ -18,9 +18,22 @@ describe(`Action creator works correctly`, () => {
   });
 
   it(`Action creator for changing sorting order returns correct action`, () => {
-    expect(ActionCreator.setSortType(`New order`)).toEqual({
+    expect(ActionCreator.setSortType(`Sort type`)).toEqual({
       type: ActionType.SET_SORT_TYPE,
-      payload: `New order`,
+      payload: `Sort type`,
+    });
+  });
+
+  it(`Action creator for reset sorting order returns correct action`, () => {
+    expect(ActionCreator.resetSortType()).toEqual({
+      type: ActionType.RESET_SORT_TYPE,
+    });
+  });
+
+  it(`Action creator for set city offers returns correct action`, () => {
+    expect(ActionCreator.setCityOffers([{offer: 1}, {offer: 2}])).toEqual({
+      type: ActionType.SET_CITY_OFFERS,
+      payload: [{offer: 1}, {offer: 2}],
     });
   });
 
@@ -49,6 +62,19 @@ describe(`Reducers works correctly`, () => {
       type: ActionType.SET_SORT_TYPE,
       payload: `Price`,
     })).toEqual(Object.assign({}, initialState, {sortType: `Price`}));
+  });
+
+  it(`Reducer should correctly set city offers`, () => {
+    expect(reducer(initialState, {
+      type: ActionType.SET_CITY_OFFERS,
+      payload: [{offer: 1}, {offer: 2}],
+    })).toEqual(Object.assign({}, initialState, {offersForCity: [{offer: 1}, {offer: 2}]}));
+  });
+
+  it(`Reducer should correctly reset sorting order`, () => {
+    expect(reducer(initialState, {
+      type: ActionType.RESET_SORT_TYPE,
+    })).toEqual(Object.assign({}, initialState));
   });
 
   it(`Reducer should correctly set active pin ID`, () => {

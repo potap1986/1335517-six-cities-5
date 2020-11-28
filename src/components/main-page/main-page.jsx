@@ -9,7 +9,7 @@ import EmptyMainPage from '../empty-main-page/empty-main-page';
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../store/action';
 
-const {changeCity, resetSortType, resetHoveredOffer, setCityOffers, setHoveredOffer, setSortType} = ActionCreator;
+const {changeCity, resetSortType, setCityOffers, setHoveredOffer, setSortType} = ActionCreator;
 
 const MainPage = (props) => {
   const {offers, hoveredOffer, city, onOfferClick, onCityChange, onSortTypeClick, onOfferHover} = props;
@@ -70,7 +70,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onCityChange: (city, allOffers) => {
     dispatch(resetSortType());
-    dispatch(resetHoveredOffer());
     dispatch(changeCity(city));
     dispatch(setCityOffers(allOffers.filter((offer) => offer.hotelCity.name === city)));
   },
@@ -78,7 +77,6 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setHoveredOffer(offer));
   },
   onSortTypeClick(sort) {
-    dispatch(resetHoveredOffer());
     dispatch(setSortType(sort));
   },
 });

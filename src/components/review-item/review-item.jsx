@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from "moment";
+import {MAX_RATE} from '../../const';
 
 const formatDateString = (date) => {
   return moment(date).format(`MMMM YYYY`);
@@ -22,7 +23,7 @@ const ReviewItem = (props) => {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: `${review.rating * 100 / 5}%`}}></span>
+            <span style={{width: `${Math.round(review.rating) * 100 / MAX_RATE}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

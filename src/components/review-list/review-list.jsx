@@ -7,7 +7,7 @@ const ReviewList = (props) => {
 
   return (
     <ul className="reviews__list">
-      {reviews.map((review, index) => (
+      {reviews.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 10).map((review, index) => (
         <ReviewItem
           key={`${review.id}-${index}`}
           review={review}

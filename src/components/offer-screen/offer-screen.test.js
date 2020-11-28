@@ -122,17 +122,17 @@ describe(`<OfferScreen /> render`, () => {
                   <OfferScreen
                     match={match}
                     offers={offers}
-                    postReview={noop}
+                    onReviewPost={noop}
                     hoveredOffer={4}
                     offer={offers[0]}
                     nearOffers={offers}
                     reviews={reviews}
                     authorizationStatus={`AUTH`}
                     onBookmarkClick={noop}
-                    loadNearOffers={noop}
-                    loadOffer={noop}
+                    onNearOffersLoad={noop}
+                    onOfferLoad={noop}
                     onOfferClick={noop}
-                    loadReviews={noop}
+                    onReviewsLoad={noop}
                   />
                 )}
               />
@@ -154,17 +154,17 @@ describe(`<OfferScreen /> render`, () => {
                   <OfferScreen
                     match={match}
                     offers={offers}
-                    postReview={noop}
+                    onReviewPost={noop}
                     hoveredOffer={4}
                     offer={offers[1]}
                     nearOffers={offers}
                     reviews={reviews}
                     authorizationStatus={`NO_AUTH`}
                     onBookmarkClick={noop}
-                    loadNearOffers={noop}
-                    loadOffer={noop}
+                    onNearOffersLoad={noop}
+                    onOfferLoad={noop}
                     onOfferClick={noop}
-                    loadReviews={noop}
+                    onReviewsLoad={noop}
                   />
                 )}
               />
@@ -186,17 +186,17 @@ describe(`<OfferScreen /> render`, () => {
                   <OfferScreen
                     match={match}
                     offers={offers}
-                    postReview={noop}
+                    onReviewPost={noop}
                     hoveredOffer={4}
                     offer={offers[0]}
                     nearOffers={offers}
                     reviews={[]}
                     authorizationStatus={`AUTH`}
                     onBookmarkClick={noop}
-                    loadNearOffers={noop}
-                    loadOffer={noop}
+                    onNearOffersLoad={noop}
+                    onOfferLoad={noop}
                     onOfferClick={noop}
-                    loadReviews={noop}
+                    onReviewsLoad={noop}
                   />
                 )}
               />
@@ -218,17 +218,17 @@ describe(`<OfferScreen /> render`, () => {
                   <OfferScreen
                     match={match}
                     offers={offers}
-                    postReview={noop}
+                    onReviewPost={noop}
                     hoveredOffer={4}
                     offer={offers[0]}
                     nearOffers={offers}
                     reviews={[]}
                     authorizationStatus={`NO_AUTH`}
                     onBookmarkClick={noop}
-                    loadNearOffers={noop}
-                    loadOffer={noop}
+                    onNearOffersLoad={noop}
+                    onOfferLoad={noop}
                     onOfferClick={noop}
-                    loadReviews={noop}
+                    onReviewsLoad={noop}
                   />
                 )}
               />
@@ -250,17 +250,17 @@ describe(`<OfferScreen /> render`, () => {
                   <OfferScreen
                     match={match}
                     offers={offers}
-                    postReview={noop}
+                    onReviewPost={noop}
                     hoveredOffer={4}
                     offer={null}
                     nearOffers={offers}
                     reviews={reviews}
                     authorizationStatus={`NO_AUTH`}
                     onBookmarkClick={noop}
-                    loadNearOffers={noop}
-                    loadOffer={noop}
+                    onNearOffersLoad={noop}
+                    onOfferLoad={noop}
                     onOfferClick={noop}
-                    loadReviews={noop}
+                    onReviewsLoad={noop}
                   />
                 )}
               />
@@ -282,17 +282,17 @@ describe(`<OfferScreen /> render`, () => {
                   <OfferScreen
                     match={match}
                     offers={offers}
-                    postReview={noop}
+                    onReviewPost={noop}
                     hoveredOffer={4}
                     offer={offers[0]}
                     nearOffers={[]}
                     reviews={reviews}
                     authorizationStatus={`NO_AUTH`}
                     onBookmarkClick={noop}
-                    loadNearOffers={noop}
-                    loadOffer={noop}
+                    onNearOffersLoad={noop}
+                    onOfferLoad={noop}
                     onOfferHover={noop}
-                    loadReviews={noop}
+                    onReviewsLoad={noop}
                   />
                 )}
               />

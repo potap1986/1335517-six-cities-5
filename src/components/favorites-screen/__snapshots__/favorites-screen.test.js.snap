@@ -102,6 +102,7 @@ exports[`<FavoritesScreen /> render correctly renders Favorites Screen w/ offers
             >
               <article
                 className="place-card favorites__card"
+                onMouseLeave={[Function]}
                 onMouseOver={[Function]}
               >
                 <div
@@ -208,6 +209,7 @@ exports[`<FavoritesScreen /> render correctly renders Favorites Screen w/ offers
               </article>
               <article
                 className="place-card favorites__card"
+                onMouseLeave={[Function]}
                 onMouseOver={[Function]}
               >
                 <div

@@ -7,22 +7,20 @@ import Map from '../map/map';
 import Bookmark from '../bookmark/bookmark';
 import OfferCard from '../offer-card/offer-card';
 import ReviewSection from '../review-section/review-section';
-import {ActionCreator} from '../../store/action';
 import {ApiActionCreator} from "../../store/api-actions";
-
-const {setHoveredOffer} = ActionCreator;
+import {MAX_RATE} from '../../const';
 
 const OfferScreen = (props) => {
-  const {offer, nearOffers, reviews, loadOffer, loadNearOffers, loadReviews, postReview, hoveredOffer, onOfferHover, onBookmarkClick, authorizationStatus} = props;
+  const {offer, nearOffers, reviews, onOfferLoad, onNearOffersLoad, onReviewsLoad, onReviewPost, onBookmarkClick, authorizationStatus} = props;
   const getOfferId = () => props.match.params.id;
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [offer]);
   const idOffer = getOfferId();
   React.useEffect(() => {
-    loadOffer(idOffer);
-    loadNearOffers(idOffer);
-    loadReviews(idOffer);
+    onOfferLoad(idOffer);
+    onNearOffersLoad(idOffer);
+    onReviewsLoad(idOffer);
   }, [idOffer]);
 
   return (
@@ -58,7 +56,7 @@ const OfferScreen = (props) => {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: `${offer.rating * 100 / 5}%`}}></span>
+                  <span style={{width: `${Math.round(offer.rating) * 100 / MAX_RATE}%`}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{offer.rating}</span>
@@ -118,12 +116,12 @@ const OfferScreen = (props) => {
 
               </div>
 
-              <ReviewSection reviews={reviews} offer={offer} authorizationStatus={authorizationStatus} onSubmit={postReview}/>
+              <ReviewSection reviews={reviews} offer={offer} authorizationStatus={authorizationStatus} onSubmit={onReviewPost}/>
 
             </div>
           </div>
           <section className="property__map map">
-            {nearOffers && <Map offers={[...nearOffers, offer]} hoveredOffer={hoveredOffer} />}
+            {nearOffers && <Map offers={[...nearOffers, offer]} hoveredOffer={offer.id} />}
           </section>
         </section>
 
@@ -135,7 +133,7 @@ const OfferScreen = (props) => {
 
               {nearOffers.map((otherOffer) => (
                 otherOffer !== offer &&
-                <OfferCard key={otherOffer.id} onOfferHover={onOfferHover} onOfferClick={noop} offer={otherOffer} className={`near-places`} onBookmarkClick={onBookmarkClick}/>
+                <OfferCard key={otherOffer.id} onOfferHover={noop} onOfferClick={noop} offer={otherOffer} className={`near-places`} onBookmarkClick={onBookmarkClick}/>
               ))}
 
             </div>
@@ -153,12 +151,10 @@ OfferScreen.propTypes = {
   offers: PropTypes.array,
   nearOffers: PropTypes.array,
   reviews: PropTypes.array,
-  hoveredOffer: PropTypes.number.isRequired,
-  onOfferHover: PropTypes.func.isRequired,
-  loadOffer: PropTypes.func.isRequired,
-  loadNearOffers: PropTypes.func.isRequired,
-  loadReviews: PropTypes.func.isRequired,
-  postReview: PropTypes.func.isRequired,
+  onOfferLoad: PropTypes.func.isRequired,
+  onNearOffersLoad: PropTypes.func.isRequired,
+  onReviewsLoad: PropTypes.func.isRequired,
+  onReviewPost: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
 };
@@ -168,27 +164,24 @@ const mapStateToProps = (state) => ({
   nearOffers: state.DATA.nearOffers,
   offer: state.DATA.offer,
   reviews: state.DATA.reviews,
-  hoveredOffer: state.APPLICATION.hoveredOffer,
   authorizationStatus: state.USER.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onOfferHover(offer) {
-    dispatch(setHoveredOffer(offer));
-  },
-  loadOffer(offer) {
+  onOfferLoad(offer) {
     dispatch(ApiActionCreator.fetchOffer(offer));
   },
-  loadNearOffers(offer) {
+  onNearOffersLoad(offer) {
     dispatch(ApiActionCreator.fetchNearOffers(offer));
   },
-  loadReviews(reviews) {
+  onReviewsLoad(reviews) {
     dispatch(ApiActionCreator.loadReviews(reviews));
   },
   onBookmarkClick: (id, status) => {
     dispatch(ApiActionCreator.changeOfferStatus(id, status));
+    // dispatch(ApiActionCreator.fetchOffer(id));
   },
-  postReview: (id, review) => {
+  onReviewPost: (id, review) => {
     dispatch(ApiActionCreator.postReview(id, review));
   },
 });

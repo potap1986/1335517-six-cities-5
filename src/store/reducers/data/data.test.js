@@ -19,6 +19,13 @@ describe(`Action creator works correctly`, () => {
     });
   });
 
+  it(`Action creator for loading offer returns correct action`, () => {
+    expect(ActionCreator.loadOffer(offer)).toEqual({
+      type: ActionType.LOAD_OFFER,
+      payload: offer,
+    });
+  });
+
   it(`Action creator for loading near offers returns correct action`, () => {
     expect(ActionCreator.loadNearOffers([offer, offer])).toEqual({
       type: ActionType.LOAD_NEAR_OFFERS,
@@ -52,6 +59,13 @@ describe(`Reducers works correctly`, () => {
       type: ActionType.LOAD_OFFERS,
       payload: [offerFromServer, offerFromServer],
     })).toEqual(Object.assign({}, initialState, {offers: [offer, offer]}));
+  });
+
+  it(`Reducer should correctly set offer`, () => {
+    expect(reducer(initialState, {
+      type: ActionType.LOAD_OFFER,
+      payload: offerFromServer,
+    })).toEqual(Object.assign({}, initialState, {offer}));
   });
 
   it(`Reducer should correctly set reviews`, () => {

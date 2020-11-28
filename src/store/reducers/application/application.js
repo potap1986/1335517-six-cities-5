@@ -19,10 +19,6 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         sortType: Sorting.POPULAR,
       });
-    case ActionType.RESET_HOVERED_OFFER:
-      return extend(state, {
-        hoveredOffer: -1,
-      });
     case ActionType.SET_HOVERED_OFFER:
       return extend(state, {
         hoveredOffer: action.payload,

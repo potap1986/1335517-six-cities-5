@@ -149,12 +149,6 @@ describe(`Action creators work correctly`, () => {
     });
   });
 
-  it(`Action creator for reset hovered offer returns correct action`, () => {
-    expect(ActionCreator.resetHoveredOffer()).toEqual({
-      type: ActionType.RESET_HOVERED_OFFER,
-    });
-  });
-
   it(`Action creator for reset sort type returns correct action`, () => {
     expect(ActionCreator.resetSortType()).toEqual({
       type: ActionType.RESET_SORT_TYPE
