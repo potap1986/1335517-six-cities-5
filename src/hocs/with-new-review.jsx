@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from "prop-types";
+import {ReviewLength} from '../const';
 
 const withNewReview = (WrappedComponentForm) => {
   class WithNewReview extends PureComponent {
@@ -59,7 +60,7 @@ const withNewReview = (WrappedComponentForm) => {
       } else {
         if (state.review.length < 50 || state.review.length > 300) {
           this.setState({isValid: false});
-          this._textRef.current.setCustomValidity(`Comment should be from 50 to 300 characters`);
+          this._textRef.current.setCustomValidity(`Comment should be from ${ReviewLength.MIN} to ${ReviewLength.MAX} characters`);
         } else {
           this.setState({isValid: true});
           this._markRef.current.setCustomValidity(``);

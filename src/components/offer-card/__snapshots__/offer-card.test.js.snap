@@ -3,6 +3,7 @@
 exports[`OfferCard correctly renders after relaunch 1`] = `
 <article
   className="place-card main__card"
+  onMouseLeave={[Function]}
   onMouseOver={[Function]}
 >
   <div

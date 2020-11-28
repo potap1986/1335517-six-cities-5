@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Bookmark from '../bookmark/bookmark';
 import history from '../../browser-history';
+import {MAX_RATE, DEFAULT_HOVER} from '../../const';
 
 const OfferCard = (props) => {
   const {onOfferClick, onBookmarkClick, onOfferHover, offer, className} = props;
@@ -12,6 +13,9 @@ const OfferCard = (props) => {
       className={`place-card ${className === `cities` ? `${className}__place-card` : `${className}__card`}`}
       onMouseOver={() => {
         onOfferHover(offer.id);
+      }}
+      onMouseLeave={() => {
+        onOfferHover(DEFAULT_HOVER);
       }}>
       {offer.isPremium
         &&
@@ -39,7 +43,7 @@ const OfferCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${offer.rating * 100 / 5}%`}}></span>
+            <span style={{width: `${Math.round(offer.rating) * 100 / MAX_RATE}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

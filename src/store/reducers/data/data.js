@@ -1,5 +1,5 @@
 import {CITIES} from '../../../const';
-import {extend, updateOffers} from '../../../utils';
+import {extend} from '../../../utils';
 import {ActionType} from '../../action';
 import {adaptOfferToClient, adaptReviewToClient} from '../../../store/adapters';
 
@@ -40,10 +40,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_REVIEWS:
       return extend(state, {
         reviews: getAdaptedReviews(action.payload),
-      });
-    case ActionType.UPDATE_OFFERS:
-      return extend(state, {
-        offers: updateOffers(state.offers, adaptOfferToClient(action.payload)),
       });
     default:
       return state;

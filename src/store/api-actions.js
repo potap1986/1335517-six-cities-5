@@ -1,5 +1,5 @@
 import {ActionCreator} from './action';
-import {AuthorizationStatus} from '../const';
+import {AuthorizationStatus, HttpCode} from '../const';
 import {APIRoute} from '../const';
 import {adaptUserToClient} from '../store/adapters';
 
@@ -38,10 +38,10 @@ const ApiActionCreator = {
   ),
   changeOfferStatus: (id, status) => (dispatch, _getState, api) => {
     const numberStatus = status ? 1 : 0;
-    api.post(`${APIRoute.FAVORITE}/${id}/${numberStatus}`)
-    .then((response) => {
+    api.post(`${APIRoute.FAVORITE}/${id}/${numberStatus}`);
+    /* .then((response) => {
       dispatch(ActionCreator.updateOffers(response.data));
-    });
+    }); */
   },
   getFavoriteOffers: () => (dispatch, _getState, api) => {
     api.get(APIRoute.FAVORITE)
@@ -50,11 +50,13 @@ const ApiActionCreator = {
 
   postReview: (id, review) => (dispatch, _getState, api) => {
     api.post(`${APIRoute.REVIEWS}/${id}`, review)
+    // api.post(`${APIRoute.REVIEWS}/${id}`, `ggggg`)
     .then((response) => {
-      dispatch(ActionCreator.loadReviews(response.data));
+      if (response.status === HttpCode.SUCCESS) {
+        dispatch(ActionCreator.loadReviews(response.data));
+      }
     });
   }
-
 };
 
 export {ApiActionCreator};

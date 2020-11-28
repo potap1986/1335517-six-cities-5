@@ -1,13 +1,9 @@
 import axios from "axios";
-import {AuthorizationStatus} from "../const";
+import {AuthorizationStatus, HttpCode} from "../const";
 import {ActionCreator} from "../store/action";
 
 const BACKEND_URL = `https://5.react.pages.academy/six-cities`;
 const REQUEST_TIMEOUT = 5000;
-
-const HttpCode = {
-  UNAUTHORIZED: 401
-};
 
 const createAPI = (dispatch, login) => {
   const api = axios.create({
@@ -24,6 +20,8 @@ const createAPI = (dispatch, login) => {
     if (response.status === HttpCode.UNAUTHORIZED) {
       dispatch(ActionCreator.getAuthorization(AuthorizationStatus.NO_AUTH));
       login();
+    } else {
+      alert(`Ошибка`)
     }
     return err;
   };

@@ -5,6 +5,14 @@ export const Sorting = {
   TOP_RATED: `Top rated first`,
 };
 
+export const ReviewLength = {
+  MIN: 50,
+  MAX: 300,
+};
+
+export const MAX_RATE = 5;
+export const DEFAULT_HOVER = -1;
+
 export const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
@@ -23,6 +31,11 @@ export const APIRoute = {
   LOGIN: `/login`,
   REVIEWS: `/comments`,
   FAVORITE: `/favorite`,
+};
+
+export const HttpCode = {
+  UNAUTHORIZED: 401,
+  SUCCESS: 200
 };
 
 export const CITIES = [`Amsterdam`, `Paris`, `Cologne`, `Brussels`, `Hamburg`, `Dusseldorf`];
