@@ -46,7 +46,7 @@ export const user = {
   id: 1,
   email: `Oliver.conner@gmail.com`,
   name: `Oliver.conner`,
-  avatar: `img/1.png`,
+  avatarUrl: `img/1.png`,
   isPro: false,
 };
 

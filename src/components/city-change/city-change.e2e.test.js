@@ -28,8 +28,8 @@ const offers = [{
   hotelHost: {
     id: 2,
     name: `John Doe`,
-    isPro: true,
-    avatarUrl: `mock`,
+    isProUser: true,
+    avatar: `mock`,
   },
   description: `Mock. Mock.`,
   coordinates: {
@@ -62,8 +62,8 @@ const offers = [{
   hotelHost: {
     id: 2,
     name: `John Doe`,
-    isPro: true,
-    avatarUrl: `mock`,
+    isProUser: true,
+    avatar: `mock`,
   },
   description: `Mock. Mock.`,
   coordinates: {

@@ -9,6 +9,7 @@ const withNewReview = (WrappedComponentForm) => {
       this.state = {
         rating: 0,
         review: ``,
+        isError: false,
         isValid: false,
       };
 
@@ -23,10 +24,10 @@ const withNewReview = (WrappedComponentForm) => {
 
     _handleSubmit(evt) {
       const {onSubmit, offer} = this.props;
+      this.setState({isError: false});
       evt.preventDefault();
       if (this.state.isValid) {
-        onSubmit(offer.id, {comment: this.state.review, rating: this.state.rating});
-        this._resetForm();
+        onSubmit(offer.id, {comment: this.state.review, rating: this.state.rating}, () => this._resetForm(), () => this.setState({isError: true}));
       } else {
         this._validateReview(this.state);
       }
@@ -82,6 +83,7 @@ const withNewReview = (WrappedComponentForm) => {
         textRef={this._textRef}
         markRef={this._markRef}
         buttonRef={this._buttonRef}
+        isError={this.state.isError}
       />;
     }
   }

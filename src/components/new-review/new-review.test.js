@@ -32,6 +32,7 @@ describe(`<NewReview /> render`, () => {
             markRef={ref.mark}
             buttonRef={ref.button}
             isValid={true}
+            isError={false}
           />)
       .toJSON();
 

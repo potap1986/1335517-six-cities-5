@@ -33,6 +33,7 @@ describe(`<NewReview /> e2e testing`, () => {
           markRef={ref.mark}
           buttonRef={ref.button}
           isValid={true}
+          isError={false}
         />);
 
     const container = wrapper.find(`form`);

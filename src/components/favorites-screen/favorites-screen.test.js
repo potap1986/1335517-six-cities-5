@@ -7,6 +7,8 @@ import rootReducer from '../../store/reducers/root-reducer';
 import {Router} from 'react-router-dom';
 import browserHistory from '../../browser-history';
 
+jest.mock(`../header/header`, () => `Header`);
+
 const offers = [{
   hotelCity: {
     name: `Lafayette`,
@@ -30,8 +32,8 @@ const offers = [{
   hotelHost: {
     id: 2,
     name: `John Doe`,
-    isPro: true,
-    avatarUrl: `mock`,
+    isProUser: true,
+    avatar: `mock`,
   },
   description: `Mock. Mock.`,
   coordinates: {
@@ -64,8 +66,8 @@ const offers = [{
   hotelHost: {
     id: 2,
     name: `John Doe`,
-    isPro: true,
-    avatarUrl: `mock`,
+    isProUser: true,
+    avatar: `mock`,
   },
   description: `Mock. Mock.`,
   coordinates: {

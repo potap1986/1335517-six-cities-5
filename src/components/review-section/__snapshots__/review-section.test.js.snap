@@ -27,7 +27,7 @@ exports[`<ReviewSection /> render correctly renders Review Section w/ reviews if
           className="reviews__avatar-wrapper user__avatar-wrapper"
         >
           <img
-            alt="undefined avatar"
+            alt="Mark Goldberg avatar"
             className="reviews__avatar user__avatar"
             height="54"
             src="url"
@@ -36,7 +36,9 @@ exports[`<ReviewSection /> render correctly renders Review Section w/ reviews if
         </div>
         <span
           className="reviews__user-name"
-        />
+        >
+          Mark Goldberg
+        </span>
       </div>
       <div
         className="reviews__info"
@@ -272,7 +274,7 @@ exports[`<ReviewSection /> render correctly renders Review Section w/ reviews if
           className="reviews__avatar-wrapper user__avatar-wrapper"
         >
           <img
-            alt="undefined avatar"
+            alt="Mark Goldberg avatar"
             className="reviews__avatar user__avatar"
             height="54"
             src="url"
@@ -281,7 +283,9 @@ exports[`<ReviewSection /> render correctly renders Review Section w/ reviews if
         </div>
         <span
           className="reviews__user-name"
-        />
+        >
+          Mark Goldberg
+        </span>
       </div>
       <div
         className="reviews__info"

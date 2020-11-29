@@ -37,7 +37,13 @@ const Header = (props) => {
 
 Header.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  user: PropTypes.object.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+    isPro: PropTypes.bool.isRequired,
+    avatarUrl: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => ({

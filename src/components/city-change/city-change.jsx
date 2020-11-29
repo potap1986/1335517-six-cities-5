@@ -31,7 +31,40 @@ CityChange.propTypes = {
   onCityChange: PropTypes.func.isRequired,
   cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   currentCity: PropTypes.string.isRequired,
-  allOffers: PropTypes.array.isRequired,
+  allOffers: PropTypes.arrayOf(PropTypes.shape({
+    hotelCity: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        lat: PropTypes.number.isRequired,
+        lng: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
+    }),
+    previewImage: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    title: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    adults: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+    hotelHost: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      isProUser: PropTypes.bool.isRequired,
+      avatar: PropTypes.string.isRequired,
+    }).isRequired,
+    description: PropTypes.string.isRequired,
+    coordinates: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      lng: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }),
+    id: PropTypes.number.isRequired,
+  })).isRequired,
 };
 
 const mapStateToProps = (state) => ({

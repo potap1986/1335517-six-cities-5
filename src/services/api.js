@@ -20,8 +20,6 @@ const createAPI = (dispatch, login) => {
     if (response.status === HttpCode.UNAUTHORIZED) {
       dispatch(ActionCreator.getAuthorization(AuthorizationStatus.NO_AUTH));
       login();
-    } else {
-      alert(`Ошибка`)
     }
     return err;
   };

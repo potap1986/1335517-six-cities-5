@@ -9,6 +9,7 @@ jest.mock(`react-router-dom`, () => ({
 const user = {
   id: 1,
   name: `Mark Goldberg`,
+  email: `Oliver.conner@gmail.com`,
   isPro: true,
   avatarUrl: `url`,
 };

@@ -61,6 +61,13 @@ describe(`Reducers works correctly`, () => {
     })).toEqual(Object.assign({}, initialState, {offers: [offer, offer]}));
   });
 
+  it(`Reducer should correctly set naer offers`, () => {
+    expect(reducer(initialState, {
+      type: ActionType.LOAD_NEAR_OFFERS,
+      payload: [offerFromServer, offerFromServer],
+    })).toEqual(Object.assign({}, initialState, {nearOffers: [offer, offer]}));
+  });
+
   it(`Reducer should correctly set offer`, () => {
     expect(reducer(initialState, {
       type: ActionType.LOAD_OFFER,

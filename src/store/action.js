@@ -84,9 +84,4 @@ export const ActionCreator = {
     type: ActionType.SIGN_IN,
     payload: user,
   }),
-
-  /* updateOffers: (offer) => ({
-    type: ActionType.UPDATE_OFFERS,
-    payload: offer,
-  }) */
 };

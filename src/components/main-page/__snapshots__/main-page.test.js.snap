@@ -81,9 +81,9 @@ exports[`Main screen correctly renders after relaunch 1`] = `
                       "name": "Lafayette",
                     },
                     "hotelHost": Object {
-                      "avatarUrl": "mock",
+                      "avatar": "mock",
                       "id": 2,
-                      "isPro": true,
+                      "isProUser": true,
                       "name": "John Doe",
                     },
                     "id": 1,
@@ -121,9 +121,9 @@ exports[`Main screen correctly renders after relaunch 1`] = `
                       "name": "Lafayette",
                     },
                     "hotelHost": Object {
-                      "avatarUrl": "mock",
+                      "avatar": "mock",
                       "id": 2,
-                      "isPro": true,
+                      "isProUser": true,
                       "name": "John Doe",
                     },
                     "id": 2,

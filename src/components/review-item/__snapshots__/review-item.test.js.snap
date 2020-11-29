@@ -11,7 +11,7 @@ exports[`<ReviewItem /> render correctly renders Review Item 1`] = `
       className="reviews__avatar-wrapper user__avatar-wrapper"
     >
       <img
-        alt="undefined avatar"
+        alt="Mark Goldberg avatar"
         className="reviews__avatar user__avatar"
         height="54"
         src="url"
@@ -20,7 +20,9 @@ exports[`<ReviewItem /> render correctly renders Review Item 1`] = `
     </div>
     <span
       className="reviews__user-name"
-    />
+    >
+      Mark Goldberg
+    </span>
   </div>
   <div
     className="reviews__info"

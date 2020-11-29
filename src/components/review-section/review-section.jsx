@@ -24,7 +24,18 @@ const ReviewSection = (props) => {
 ReviewSection.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
-  reviews: PropTypes.array,
+  reviews: PropTypes.arrayOf(
+      PropTypes.shape({
+        localUser: PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          name: PropTypes.string.isRequired,
+          isPro: PropTypes.bool.isRequired,
+          avatarUrl: PropTypes.string.isRequired,
+        }).isRequired,
+        rating: PropTypes.number.isRequired,
+        comment: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+      })),
   offer: PropTypes.shape({
     id: PropTypes.number.isRequired,
   }).isRequired,

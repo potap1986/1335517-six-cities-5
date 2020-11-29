@@ -25,9 +25,3 @@ export const getSorting = (offers, sort) => {
 export const getUserAvatar = (status, avatar) => {
   return status === AuthorizationStatus.NO_AUTH ? `` : <img className="reviews__avatar user__avatar" src={avatar} width="54" height="54" alt="User avatar"/>;
 };
-
-// export const updateOffers = (allOffers, newOffer) => {
-//   const changedItemIndex = allOffers.findIndex((item) => item.id === newOffer.id);
-//   allOffers[changedItemIndex].isFavorite = !allOffers[changedItemIndex].isFavorite;
-//   return allOffers;
-// };

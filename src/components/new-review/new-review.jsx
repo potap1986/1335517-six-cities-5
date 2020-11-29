@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const NewReview = ({onInputChange, onSubmit, formRef, textRef, markRef, buttonRef, isValid}) => {
+const NewReview = ({onInputChange, onSubmit, formRef, textRef, markRef, buttonRef, isValid, isError}) => {
   return (
     <form
       className="reviews__form form"
@@ -58,6 +58,7 @@ const NewReview = ({onInputChange, onSubmit, formRef, textRef, markRef, buttonRe
           </svg>
         </label>
       </div>
+      {isError && <p style={{color: `red`, fontWeight: 500}}>Server error!</p>}
       <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={onInputChange}
         ref={textRef}
@@ -80,6 +81,7 @@ NewReview.propTypes = {
   markRef: PropTypes.shape({current: PropTypes.instanceOf(Element)}),
   buttonRef: PropTypes.shape({current: PropTypes.instanceOf(Element)}),
   isValid: PropTypes.bool.isRequired,
+  isError: PropTypes.bool.isRequired,
 };
 
 export default NewReview;

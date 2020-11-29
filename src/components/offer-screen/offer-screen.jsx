@@ -11,7 +11,7 @@ import {ApiActionCreator} from "../../store/api-actions";
 import {MAX_RATE} from '../../const';
 
 const OfferScreen = (props) => {
-  const {offer, nearOffers, reviews, onOfferLoad, onNearOffersLoad, onReviewsLoad, onReviewPost, onBookmarkClick, authorizationStatus} = props;
+  const {offer, nearOffers, reviews, onOfferLoad, onNearOffersLoad, onReviewsLoad, onReviewPost, onBookmarkClick, onNearBookmarkClick, authorizationStatus} = props;
   const getOfferId = () => props.match.params.id;
   React.useEffect(() => {
     window.scrollTo(0, 0);
@@ -133,7 +133,7 @@ const OfferScreen = (props) => {
 
               {nearOffers.map((otherOffer) => (
                 otherOffer !== offer &&
-                <OfferCard key={otherOffer.id} onOfferHover={noop} onOfferClick={noop} offer={otherOffer} className={`near-places`} onBookmarkClick={onBookmarkClick}/>
+                <OfferCard key={otherOffer.id} onOfferHover={noop} onOfferClick={noop} offer={otherOffer} className={`near-places`} onBookmarkClick={onNearBookmarkClick.bind(null, offer.id)}/>
               ))}
 
             </div>
@@ -146,21 +146,101 @@ const OfferScreen = (props) => {
 };
 
 OfferScreen.propTypes = {
-  offer: PropTypes.object,
+  offer: PropTypes.shape({
+    hotelCity: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        lat: PropTypes.number.isRequired,
+        lng: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
+    }),
+    previewImage: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    title: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    adults: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+    hotelHost: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      isProUser: PropTypes.bool.isRequired,
+      avatar: PropTypes.string.isRequired,
+    }).isRequired,
+    description: PropTypes.string.isRequired,
+    coordinates: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      lng: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }),
+    id: PropTypes.number.isRequired,
+  }),
   onBookmarkClick: PropTypes.func.isRequired,
-  offers: PropTypes.array,
-  nearOffers: PropTypes.array,
-  reviews: PropTypes.array,
+  onNearBookmarkClick: PropTypes.func.isRequired,
+  nearOffers: PropTypes.arrayOf(PropTypes.shape({
+    hotelCity: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        lat: PropTypes.number.isRequired,
+        lng: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }),
+    }),
+    previewImage: PropTypes.string.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    title: PropTypes.string.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    adults: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string).isRequired,
+    hotelHost: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      isProUser: PropTypes.bool.isRequired,
+      avatar: PropTypes.string.isRequired,
+    }).isRequired,
+    description: PropTypes.string.isRequired,
+    coordinates: PropTypes.shape({
+      lat: PropTypes.number.isRequired,
+      lng: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }),
+    id: PropTypes.number.isRequired,
+  })),
+  reviews: PropTypes.arrayOf(
+      PropTypes.shape({
+        localUser: PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          name: PropTypes.string.isRequired,
+          isPro: PropTypes.bool.isRequired,
+          avatarUrl: PropTypes.string.isRequired,
+        }).isRequired,
+        rating: PropTypes.number.isRequired,
+        comment: PropTypes.string.isRequired,
+        date: PropTypes.string.isRequired,
+      })),
   onOfferLoad: PropTypes.func.isRequired,
   onNearOffersLoad: PropTypes.func.isRequired,
   onReviewsLoad: PropTypes.func.isRequired,
   onReviewPost: PropTypes.func.isRequired,
-  match: PropTypes.object.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
   authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.APPLICATION.offersForCity,
   nearOffers: state.DATA.nearOffers,
   offer: state.DATA.offer,
   reviews: state.DATA.reviews,
@@ -178,11 +258,13 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ApiActionCreator.loadReviews(reviews));
   },
   onBookmarkClick: (id, status) => {
-    dispatch(ApiActionCreator.changeOfferStatus(id, status));
-    // dispatch(ApiActionCreator.fetchOffer(id));
+    dispatch(ApiActionCreator.changeOfferStatus(id, status, () => dispatch(ApiActionCreator.fetchOffer(id))));
   },
-  onReviewPost: (id, review) => {
-    dispatch(ApiActionCreator.postReview(id, review));
+  onNearBookmarkClick: (mainId, id, status) => {
+    dispatch(ApiActionCreator.changeOfferStatus(id, status, () => dispatch(ApiActionCreator.fetchNearOffers(mainId))));
+  },
+  onReviewPost: (id, review, successCallback, failureCallback) => {
+    dispatch(ApiActionCreator.postReview(id, review, successCallback, failureCallback));
   },
 });
 

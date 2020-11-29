@@ -36,26 +36,30 @@ const ApiActionCreator = {
     api.get(`${APIRoute.REVIEWS}/${id}`)
     .then(({data}) => dispatch(ActionCreator.loadReviews(data)))
   ),
-  changeOfferStatus: (id, status) => (dispatch, _getState, api) => {
+  changeOfferStatus: (id, status, successCallback) => (dispatch, _getState, api) => {
     const numberStatus = status ? 1 : 0;
-    api.post(`${APIRoute.FAVORITE}/${id}/${numberStatus}`);
-    /* .then((response) => {
-      dispatch(ActionCreator.updateOffers(response.data));
-    }); */
+    api.post(`${APIRoute.FAVORITE}/${id}/${numberStatus}`)
+    .then(() => {
+      if (successCallback) {
+        successCallback();
+      }
+    });
   },
   getFavoriteOffers: () => (dispatch, _getState, api) => {
     api.get(APIRoute.FAVORITE)
     .then((response) => dispatch(ActionCreator.updateOffers(response.data)));
   },
 
-  postReview: (id, review) => (dispatch, _getState, api) => {
+  postReview: (id, review, successCallback, failureCallback) => (dispatch, _getState, api) => {
     api.post(`${APIRoute.REVIEWS}/${id}`, review)
-    // api.post(`${APIRoute.REVIEWS}/${id}`, `ggggg`)
     .then((response) => {
       if (response.status === HttpCode.SUCCESS) {
         dispatch(ActionCreator.loadReviews(response.data));
+        successCallback();
+      } else {
+        failureCallback();
       }
-    });
+    }).catch((e) => failureCallback(e));
   }
 };
 

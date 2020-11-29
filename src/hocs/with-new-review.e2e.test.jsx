@@ -57,6 +57,7 @@ it(`Review form should correctly change state on input and submit `, () => {
     markRef={{current: document.createElement(`input`)}}
     buttonRef={{current: document.createElement(`button`)}}
     isValid={true}
+    isError={false}
   />);
 
   const form = reviewForm.find(`.reviews__form`);
@@ -66,6 +67,7 @@ it(`Review form should correctly change state on input and submit `, () => {
     review: ``,
     rating: 0,
     isValid: false,
+    isError: false,
   });
 
 });
