@@ -46,11 +46,11 @@ it(`Review form should correctly change state on input and submit `, () => {
   };
 
   const MockReviewFormWrapped = withNewReview(NewReview);
-  const formSubmitHandler = jest.fn();
+  const onSubmit = jest.fn();
 
   const reviewForm = mount(<MockReviewFormWrapped
     offer={offer}
-    onSubmit={formSubmitHandler}
+    onSubmit={onSubmit}
     onInputChange={jest.fn()}
     formRef={{current: document.createElement(`form`)}}
     textRef={{current: document.createElement(`textarea`)}}
@@ -68,6 +68,42 @@ it(`Review form should correctly change state on input and submit `, () => {
     rating: 0,
     isValid: false,
     isError: false,
+  });
+
+});
+
+
+it(`onSubmit should be called after form submit`, () => {
+  const MockReviewFormWrapped = withNewReview(NewReview);
+  const onSubmit = jest.fn();
+
+  const reviewForm = mount(<MockReviewFormWrapped
+    offer={offer}
+    onSubmit={onSubmit}
+    onInputChange={jest.fn()}
+    formRef={{current: document.createElement(`form`)}}
+    textRef={{current: document.createElement(`textarea`)}}
+    markRef={{current: document.createElement(`input`)}}
+    buttonRef={{current: document.createElement(`button`)}}
+    isValid={true}
+    isError={false}
+  />);
+
+  const form = reviewForm.find(`.reviews__form`);
+
+  reviewForm.state({isValid: true}, () => {
+    expect(reviewForm.state()).toEqual({
+      review: ``,
+      rating: 0,
+      isValid: true,
+      isError: false,
+    });
+    form.simulate(`submit`);
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+    expect(onSubmit).toHaveBeenCalledWith(0, {
+      "comment": ``,
+      "rating": 0,
+    }, expect.any(Function), expect.any(Function));
   });
 
 });
