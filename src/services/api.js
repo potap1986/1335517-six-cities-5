@@ -5,7 +5,7 @@ import {ActionCreator} from "../store/action";
 const BACKEND_URL = `https://5.react.pages.academy/six-cities`;
 const REQUEST_TIMEOUT = 5000;
 
-const createAPI = (dispatch, login) => {
+const createAPI = (dispatch) => {
   const api = axios.create({
     baseURL: BACKEND_URL,
     timeout: REQUEST_TIMEOUT,
@@ -19,7 +19,6 @@ const createAPI = (dispatch, login) => {
 
     if (response.status === HttpCode.UNAUTHORIZED) {
       dispatch(ActionCreator.getAuthorization(AuthorizationStatus.NO_AUTH));
-      login();
     }
     return err;
   };
