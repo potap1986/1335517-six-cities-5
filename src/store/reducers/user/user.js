@@ -8,7 +8,7 @@ const initialState = {
     id: 0,
     email: ``,
     name: ``,
-    avatar: ``,
+    avatarUrl: ``,
     isPro: false,
   }
 };
