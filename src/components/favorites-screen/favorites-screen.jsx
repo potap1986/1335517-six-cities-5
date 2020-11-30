@@ -8,7 +8,10 @@ import {ApiActionCreator} from '../../store/api-actions';
 
 const FavoritesScreen = (props) => {
   const {offers, cities, onBookmarkClick, onOfferClick} = props;
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+  const favoriteOffers = React.useMemo(
+      () => offers.filter((offer) => offer.isFavorite),
+      [offers]
+  );
 
   return (
     <div className="page">

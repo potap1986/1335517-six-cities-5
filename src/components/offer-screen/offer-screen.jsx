@@ -258,10 +258,16 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ApiActionCreator.loadReviews(reviews));
   },
   onBookmarkClick: (id, status) => {
-    dispatch(ApiActionCreator.changeOfferStatus(id, status, () => dispatch(ApiActionCreator.fetchOffer(id))));
+    dispatch(ApiActionCreator.changeOfferStatus(id, status, () => {
+      dispatch(ApiActionCreator.fetchOffer(id));
+      dispatch(ApiActionCreator.fetchOffers());
+    }));
   },
   onNearBookmarkClick: (mainId, id, status) => {
-    dispatch(ApiActionCreator.changeOfferStatus(id, status, () => dispatch(ApiActionCreator.fetchNearOffers(mainId))));
+    dispatch(ApiActionCreator.changeOfferStatus(id, status, () => {
+      dispatch(ApiActionCreator.fetchNearOffers(mainId));
+      dispatch(ApiActionCreator.fetchOffers());
+    }));
   },
   onReviewPost: (id, review, successCallback, failureCallback) => {
     dispatch(ApiActionCreator.postReview(id, review, successCallback, failureCallback));

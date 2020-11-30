@@ -59,7 +59,7 @@ const withNewReview = (WrappedComponentForm) => {
         this.setState({isValid: false});
         this._markRef.current.setCustomValidity(`Choose the mark`);
       } else {
-        if (state.review.length < 50 || state.review.length > 300) {
+        if (state.review.length < ReviewLength.MIN || state.review.length > ReviewLength.MAX) {
           this.setState({isValid: false});
           this._textRef.current.setCustomValidity(`Comment should be from ${ReviewLength.MIN} to ${ReviewLength.MAX} characters`);
         } else {
